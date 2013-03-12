@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>BitCoin Store</title>
+<link
+	href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"
+	rel="stylesheet">
+<link href="main.css" rel="stylesheet"/>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script
+	src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="#">BitCoin Store</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="/info">About BitCoin</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<div class="container">
+			<h1>BitCoin Store</h1>
+			<p class="lead">
+				Eindelijk een BitCoin winkel waar je met iDeal kan betalen!!!
+			</p>
+		</div>
+	</header>
+
+	<div class="container">
+		<div class="row">
+
+			<article class="span9">
+				<form class="form-horizontal">
+					<fieldset>
+						<legend>Order BitCoins</legend>
+
+						<div class="control-group">
+							<label class="control-label" for="inputWallet">Wallet</label>
+							<div class="controls">
+								<input type="text" id="inputWallet" placeholder="Wallet" class="span5">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="inputBitcoins">Bitcoins</label>
+							<div class="controls">
+								<input type="number" id="inputBitcoins" placeholder="Number of Bitcoins" class="span5">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="inputEmail">Email</label>
+							<div class="controls">
+								<input type="email" id="inputEmail" placeholder="Email" class="span5">
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="selectBank">Bank</label>
+							<div class="controls">
+								<select id="inputBank" class="span5">
+									<option value="ing">ING</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-actions">
+						  <button type="submit" class="btn btn-primary">Go to Payment</button>
+						  <button type="clear" class="btn">Cancel</button>
+						</div>
+
+					</fieldset>
+				</form>
+			</article>
+
+			<aside class="span3">ASIDE</aside>
+
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<p>Designed using Bootstrap</p>
+		</div>
+	</footer>
+
+
+</body>
+</html>

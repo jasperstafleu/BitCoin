@@ -1,0 +1,9 @@
+Options +FollowSymlinks
+Options +Indexes
+RewriteEngine on
+Allow from all
+
+RewriteRule ^([^/]+/)*\. 				-																			[F]
+
+RewriteRule ^(.*/)?(.*?).css$		styles/$2.css		    									[NC,L,QSA]
+RewriteRule ^([^/]*)/?(.*)?$		public/index.php?verb=$1&uri=$1/$2		[NC,L,QSA]
