@@ -52,28 +52,41 @@
 						<div class="control-group">
 							<label class="control-label" for="inputWallet">Wallet</label>
 							<div class="controls">
-								<input type="text" id="inputWallet" placeholder="Wallet" class="span5">
+								<input type="text" required="required" class="span5"
+										id="inputWallet" placeholder="Wallet" >
 							</div>
 						</div>
 
 						<div class="control-group">
 							<label class="control-label" for="inputBitcoins">Bitcoins</label>
 							<div class="controls">
-								<input type="number" id="inputBitcoins" placeholder="Number of Bitcoins" class="span5">
+								<input type="number" required="required" class="span5"
+										id="inputBitcoins" placeholder="Number of Bitcoins" >
+							</div>
+						</div>
+
+						<div class="control-group">
+							<label class="control-label" for="inputBitcoins">Price per bitcoin</label>
+							<div class="controls">
+								<span class="uneditable-input span5" id="bitcoinsTicker">
+									<?=(new \Events\Get)->ticker()?>
+								</span>
 							</div>
 						</div>
 
 						<div class="control-group">
 							<label class="control-label" for="inputEmail">Email</label>
 							<div class="controls">
-								<input type="email" id="inputEmail" placeholder="Email" class="span5">
+								<input type="email" required="required" class="span5"
+										id="inputEmail" placeholder="Email">
 							</div>
 						</div>
 
 						<div class="control-group">
 							<label class="control-label" for="selectBank">Bank</label>
 							<div class="controls">
-								<select id="inputBank" class="span5">
+								<select id="inputBank" required="required" class="span5">
+									<option value="" disabled="disabled">Kies bank</option>
 									<option value="ing">ING</option>
 								</select>
 							</div>
@@ -81,7 +94,7 @@
 
 						<div class="form-actions">
 						  <button type="submit" class="btn btn-primary">Go to Payment</button>
-						  <button type="clear" class="btn">Cancel</button>
+						  <button type="reset" class="btn">Cancel</button>
 						</div>
 
 					</fieldset>

@@ -2,5 +2,4 @@
 chdir('..');
 require_once 'config/config.php';
 
-// Operations\Main::run();
-include 'views/form.phtml';
+\Events\Dispatcher::trigger(array_filter(explode('/', $_REQUEST['uri'])), $_REQUEST);

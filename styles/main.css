@@ -29,6 +29,15 @@ header {
 	border-top: 0px; 
 }
 
+option {
+	color: black;
+}
+
+option[disabled] {
+	display: none;
+	color: gray;
+}
+
 @media (max-width: 979px) {
 	header {
 		margin-top: -20px;
