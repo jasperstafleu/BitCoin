@@ -2,9 +2,9 @@ AddDefaultCharset UTF-8
 Options +FollowSymlinks
 Options +Indexes
 RewriteEngine on
-Allow from all
 
-RewriteRule ^([^/]+/)*\. 				-																			[F]
+RewriteRule ^([^/]+/)*\. 				-																			[F,L]
 
-RewriteRule ^(.*/)?(.*?).css$		styles/$2.css		    									[NC,L,QSA]
-RewriteRule ^(.*)?$							public/index.php?uri=$1								[NC,L,QSA]
+RewriteCond %{REQUEST_URI}	!^/public
+RewriteRule (.*)						public/$1																	[NC,L,QSA]
+
