@@ -1,7 +1,7 @@
 <?php
 namespace Views;
 
-class Ticker implements \Interfaces\View {
+class Rate implements \Interfaces\View {
 
 	/**
 	 * (non-PHPdoc)
@@ -37,4 +37,4 @@ class Ticker implements \Interfaces\View {
 		echo $_REQUEST['callback'] . '(' . json_encode($model) . ');';
 	} // jsonp();
 
-} // end class Ticker
+} // end class Rate

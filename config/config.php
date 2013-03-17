@@ -1,6 +1,6 @@
 <?php
 define('BASEDIR', getcwd() . DIRECTORY_SEPARATOR);
-define('CLASS_BITCOINTICKERSERVICE', 'MtGoxService');
+define('CLASS_BITCOINRATESERVICE', 'MtGoxService');
 
 session_set_cookie_params(30*60, '/', '', true);
 session_start();

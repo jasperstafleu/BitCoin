@@ -3,8 +3,9 @@ Options +FollowSymlinks
 Options +Indexes
 RewriteEngine on
 
+# Ensure any dir / file starting with a dot is forbidden
 RewriteRule ^([^/]+/)*\. 				-																			[F,L]
 
-RewriteCond %{REQUEST_URI}	!^/public
+# Redirect all requests to public folder (except public folder itself)
+RewriteCond %{REQUEST_URI}	!^/public/
 RewriteRule (.*)						public/$1																	[NC,L,QSA]
-

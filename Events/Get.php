@@ -22,23 +22,23 @@ class Get implements \Interfaces\Event {
 	 * @param array $request
 	 * @param string $enacter
 	 */
-	public static function ticker(array $path = array(), array $request = array(), $enacter = 'program') {
+	public static function rate(array $path = array(), array $request = array(), $enacter = 'program') {
 		// no operations required
 
-		// get BitCoinTicker as based on MtGoxService
-		$service = '\\Classes\\' . CLASS_BITCOINTICKERSERVICE;
-		$ticker = new \Models\BitCoinTicker(new $service);
+		// get BitCoinRate as based on MtGoxService
+		$service = '\\Classes\\' . CLASS_BITCOINRATESERVICE;
+		$rate = new \Models\BitCoinRate(new $service);
 
 		if ( $enacter != 'user' ) {
-			return $ticker;
+			return $rate;
 		}
 
 		// show the correct view
 		if ( !($viewtype = reset($path)) ) {
 			$viewtype = 'std';
 		}
-		$view = new \Views\Ticker();
-		return $view->$viewtype($ticker);
-	} // ticker();
+		$view = new \Views\Rate();
+		return $view->$viewtype($rate);
+	} // rate();
 
 } // end class Get

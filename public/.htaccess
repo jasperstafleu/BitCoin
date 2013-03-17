@@ -3,10 +3,13 @@ Options +FollowSymlinks
 Options +Indexes
 RewriteEngine on
 
+# Ensure any dir / file starting with a dot is forbidden
 RewriteRule ^([^/]+/)*\. 				-																			[F,L]
 
+# Redirect any files that do not exist to index.php
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)?$										index.php?uri=$1								[NC,L,QSA]
 
-RewriteRule ^index.php$								index.php?uri=form/main					[NC,L,QSA]
+# if index.php is called without event, use the form as default
+RewriteRule ^index.php$								index.php?uri=form							[NC,L,QSA]

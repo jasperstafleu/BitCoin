@@ -8,7 +8,9 @@ class Form implements \Interfaces\Event {
 	 * @see \Interfaces\Event::trigger()
 	 */
 	public static function trigger(array $path = array(), array $request = array(), $enacter = 'program') {
-		$whichForm = array_shift($path);
+		if ( !($whichForm = array_shift($path)) ) {
+			$whichForm = 'main';
+		}
 		self::$whichForm($path, $request, $enacter);
 	} // trigger();
 
@@ -20,8 +22,11 @@ class Form implements \Interfaces\Event {
 	 * @param string $enacter
 	 */
 	public static function main(array $path = array(), array $request = array(), $enacter = 'program') {
+		$form = new \Models\Forms\Main;
+		$operation = new \Operations\Form();
+		$operation->run($form, $request);
 		$view = new \Views\Form();
-		$view->std();
+		$view->std($form);
 	} // main();
 
 } // end class Form

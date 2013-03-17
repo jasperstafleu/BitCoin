@@ -1,6 +1,6 @@
 <?php
 namespace Models;
-class BitCoinTicker implements \Interfaces\Model {
+class BitCoinRate implements \Interfaces\Model {
 
 	/**
 	 * The bitcoin value in currency units
@@ -60,4 +60,4 @@ class BitCoinTicker implements \Interfaces\Model {
 		return $this->display;
 	} // __toString();
 
-} // end class BitCoinTicker
+} // end class BitCoinRate

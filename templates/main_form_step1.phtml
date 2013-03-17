@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <title>BitCoin Store</title>
-<link
-	href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css"
-	rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
 <link href="styles/main.css" rel="stylesheet"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script
-	src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+<script	src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -45,50 +45,60 @@
 		<div class="row">
 
 			<article class="span9">
-				<form class="form-horizontal">
+				<form class="form-horizontal" method="POST">
 					<fieldset>
 						<legend>Order BitCoins</legend>
 
 						<div class="control-group">
-							<label class="control-label" for="inputWallet">Wallet</label>
+							<label class="control-label" for="<?=$form->wallet->uid?>">Wallet</label>
 							<div class="controls">
-								<input type="text" required="required" class="span5"
-										id="inputWallet" placeholder="Wallet" >
+								<?=$form->wallet
+												->setAttribute('class', 'span5')
+												->setAttribute('placeholder', 'Wallet')
+												->toHtml()
+								?>
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label class="control-label" for="inputBitcoins">Bitcoins</label>
+							<label class="control-label" for="<?=$form->number->uid?>">Bitcoins</label>
 							<div class="controls">
-								<input type="number" required="required" class="span5"
-										id="inputBitcoins" placeholder="Number of Bitcoins" >
+								<?=$form->number
+												->setAttribute('class', 'span5')
+												->setAttribute('placeholder', 'Number of Bitcoins')
+												->toHtml()
+								?>
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label class="control-label" for="inputBitcoins">Price per bitcoin</label>
+							<label class="control-label">Price per bitcoin</label>
 							<div class="controls">
-								<span class="uneditable-input span5" id="bitcoinsTicker">
-									<?=(new \Events\Get)->ticker()?>
+								<span class="uneditable-input span5" id="bitcoinsRate">
+									<?=$form->rate?>
 								</span>
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label class="control-label" for="inputEmail">Email</label>
+							<label class="control-label" for="<?=$form->email->uid?>">Email</label>
 							<div class="controls">
-								<input type="email" required="required" class="span5"
-										id="inputEmail" placeholder="Email">
+								<?=$form->email
+												->setAttribute('class', 'span5')
+												->setAttribute('placeholder', 'Email')
+												->toHtml()
+								?>
 							</div>
 						</div>
 
 						<div class="control-group">
-							<label class="control-label" for="selectBank">Bank</label>
+							<label class="control-label" for="<?=$form->bank->uid?>">Bank</label>
 							<div class="controls">
-								<select id="inputBank" required="required" class="span5">
-									<option value="" disabled="disabled">Kies bank</option>
-									<option value="ing">ING</option>
-								</select>
+								<?=$form->bank
+												->setAttribute('class', 'span5')
+												->setAttribute('placeholder', 'Kies bank')
+												->toHtml()
+								?>
 							</div>
 						</div>
 
