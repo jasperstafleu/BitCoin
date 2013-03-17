@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<?php require_once BASEDIR . 'templates/defaults/head.phtml'; ?>
+	<title>BitCoin Store - Exception</title>
+</head>
+<body>
+
+	<?php require_once BASEDIR . 'templates/defaults/header.phtml'; ?>
+
+	<div class="container">
+		<div class="row">
+
+			<article class="span9">
+				<div class="alert alert-error">
+					<h1>Exception</h1>
+					<p>
+						Something exceptional went wrong:
+						<strong><?=$exception->getMessage()?></strong>.
+					</p>
+				</div>
+			</article>
+
+			<aside class="span3">ASIDE</aside>
+
+		</div>
+	</div>
+
+	<?php require_once BASEDIR . 'templates/defaults/footer.phtml'; ?>
+
+</body>
+</html>

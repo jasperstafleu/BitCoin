@@ -27,6 +27,7 @@ class Main implements \Interfaces\Form	 {
 	 */
 	protected function _setFieldVars() {
 		$this->_fields = array(
+			'id'			=> new Fields\FormId,
 			'wallet'	=> new Fields\Wallet,
 			'number'	=> new Fields\Number,
 			'rate'		=> new Fields\BitCoinRate,
@@ -68,6 +69,7 @@ class Main implements \Interfaces\Form	 {
 				$field->setAttribute('value', $request[$name]);
 			}
 		} // foreach
+
 	} // setRequest();
 
 	/**

@@ -63,7 +63,7 @@ class MtGoxService implements \Interfaces\BitCoinService {
 	public function getIntDivider() {
 		$curr = $this->getCurrent();
 		return round($this->getValueInt() / $this->getValue());
-	} // getIntDivider();s
+	} // getIntDivider();
 
 	/**
 	 * Retrieve the current values from the MtGox service, as per the $type.
@@ -82,7 +82,7 @@ class MtGoxService implements \Interfaces\BitCoinService {
 			$resp = '';
 
 			if ( !($fp = fopen('https://data.mtgox.com/api/1/BTCEUR/ticker', 'r')) ) {
-				throw new \Exception('Failed to open MtGox service');
+				throw new \Models\Exception('Failed to open MtGox service');
 			}
 			while ( !feof($fp) ) {
 				$resp .= str_replace('\u00a0', ' ', fgets($fp));
@@ -90,7 +90,7 @@ class MtGoxService implements \Interfaces\BitCoinService {
 			fclose($fp);
 
 			if ( !($res = json_decode($resp)) || $res->result !== 'success' ) {
-				throw new \Exception('MtGox service returned invalid result');
+				throw new \Models\Exception('MtGox service returned invalid result');
 			}
 
 			$this->_current = $res->return->$type;
