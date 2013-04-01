@@ -90,6 +90,7 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
 			curl_setopt($ch, CURLOPT_TIMEOUT, 1);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // TODO: Get updated CA certificate bundle
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+			curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.22	');
 			if ( !($resp = curl_exec($ch)) ) {
 				if ( $retries <= 0 ) {
 					throw new \Stafleu\Models\Exception(curl_error($ch));
