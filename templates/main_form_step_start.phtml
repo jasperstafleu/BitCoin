@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<?php require_once BASEDIR . 'templates/defaults/head.phtml'; ?>
+<title>BitCoin Store</title>
+<body>
+
+	<?php require_once BASEDIR . 'templates/defaults/header.phtml'; ?>
+
+	<div class="container">
+		<div class="row">
+
+			<article class="span9">
+				<form class="form-horizontal" method="POST" novalidate="novalidate">
+					<?=$form->formtoken->toHtml()?>
+					<fieldset>
+						<legend>Order BitCoins</legend>
+
+						<div class="control-group<?=$form->number->validate()?'':' error'?>">
+							<label class="control-label" for="<?=$form->number->uid?>">Bitcoins</label>
+							<div class="controls">
+								<?=$form->number
+												->setAttribute('class', 'span5')
+												->setAttribute('placeholder', 'Number of Bitcoins')
+												->toHtml()
+								?>
+								<span class="help-inline"><?=$form->number->getValidationError()?></span>
+							</div>
+						</div>
+
+						<div class="control-group<?=$form->rate->validate()?'':' error'?>">
+							<label class="control-label">Price per bitcoin</label>
+							<div class="controls">
+								<span class="uneditable-input span5" id="bitcoinsRate">
+									<?=$form->rate?>
+								</span>
+								<span class="help-inline"><?=$form->rate->getValidationError()?></span>
+							</div>
+						</div>
+
+						<div class="form-actions">
+							<?php
+								if ( $next = $form->step->getNextStep() ) {
+									echo $next->setAttribute('class', 'btn btn-primary')
+														->setAttribute('text', 'Next step')
+														->toHtml();
+								}
+							?>
+							<?php
+								if ( $next = $form->step->getPreviousStep() ) {
+									echo $next->setAttribute('class', 'btn')
+														->setAttribute('text', 'Previous step')
+														->toHtml();
+								}
+							?>
+						</div>
+
+					</fieldset>
+				</form>
+			</article>
+
+			<aside class="span3">ASIDE</aside>
+
+		</div>
+	</div>
+
+	<?php require_once BASEDIR . 'templates/defaults/footer.phtml'; ?>
+
+</body>
+</html>

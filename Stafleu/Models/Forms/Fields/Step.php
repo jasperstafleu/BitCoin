@@ -1,7 +1,7 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class Email implements \Stafleu\Interfaces\FormInput {
+class Step implements \Stafleu\Interfaces\FormInput {
 	/**
 	 * Unique id for this field
 	 * @var string
@@ -9,11 +9,17 @@ class Email implements \Stafleu\Interfaces\FormInput {
 	public $uid = '';
 
 	/**
+	 * Holder for the valid steps
+	 * @var array
+	 */
+	protected $_steps = array();
+
+	/**
 	 * The html attributes for this form field
 	 * @var array
 	 */
 	protected $_htmlAttributes = array(
-			'type' => 'email',
+			'type' => 'submit',
 	);
 
 	/**
@@ -51,13 +57,26 @@ class Email implements \Stafleu\Interfaces\FormInput {
 	 * @see \Stafleu\Interfaces\FormField::toHtml()
 	 */
 	public function toHtml() {
-		$ret = '<input';
+		$ret = '<button';
+
 		foreach ( $this->_htmlAttributes as $attr => $val ) {
+			if ( $attr === 'text' ) continue;
 			$ret .= ' ' . $attr . '="' . htmlspecialchars($val) . '"';
 		} // foreach
-		$ret .= "/>";
+
+		$ret .= ">" . $this->getAttribute('text') . "</button>";
 		return $ret;
 	} // toHtml();
+
+	/**
+	 * Adds a valid step
+	 *
+	 * @param string $name
+	 */
+	public function addStep($name) {
+		$this->_steps []= $name;
+		return $this;
+	} // addOption();
 
 	/**
 	 * (non-PHPdoc)
@@ -70,7 +89,7 @@ class Email implements \Stafleu\Interfaces\FormInput {
 		if ( $value === null ) {
 			return true;
 		}
-		return filter_var($value, FILTER_VALIDATE_EMAIL);
+		return in_array($value, $this->_steps);
 	} // validate();
 
 	/**
@@ -79,17 +98,47 @@ class Email implements \Stafleu\Interfaces\FormInput {
 	 */
 	public function getValidationError() {
 		if ( !$this->validate($this->getAttribute('value')) ) {
-			return 'Not a valid email address';
+			return 'Value is not a valid email address';
 		}
 		return '';
 	} // getValidationError();
+
+	/**
+	 * Returns a new Step, with as its value the one the next step would have.
+	 *
+	 * @return Stafleu\Models\Forms\Fields\Step
+	 */
+	public function getNextStep() {
+		$index = array_search($this->getAttribute('value'), $this->_steps) + 1;
+		if ( $index >= count($this->_steps) ) {
+			return null;
+		}
+		$option = clone $this;
+		$option->setAttribute('value',$this->_steps[$index]);
+		return $option;
+	} // getNextStep();
+
+	/**
+	 * Returns a new Step, with as its value the one the previous step would have.
+	 *
+	 * @return Stafleu\Models\Forms\Fields\Step
+	 */
+	public function getPreviousStep() {
+		$index = array_search($this->getAttribute('value'), $this->_steps) - 1;
+		if ( $index < 0 ) {
+			return null;
+		}
+		$option = clone $this;
+		$option->setAttribute('value',$this->_steps[$index]);
+		return $option;
+	} // getPreviousStep();
 
 	/**
 	 * (non-PHPdoc)
 	 * @see \Stafleu\Interfaces\Model::__toString()
 	 */
 	public function __toString() {
-		return $this->_htmlAttributes['value'];
+		return (string) $this->getAttribute('value');
 	} // __toString();
 
-} // end class Email
+} // end class Step

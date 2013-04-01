@@ -3,12 +3,6 @@ namespace Stafleu\Models\Forms;
 
 class Main implements \Stafleu\Interfaces\Form {
 	/**
-	 * The current step of this form
-	 * @var number
-	 */
-	protected $_step = 1;
-
-	/**
 	 * The fields relevant to this form
 	 * @var unknown
 	 */
@@ -28,6 +22,7 @@ class Main implements \Stafleu\Interfaces\Form {
 	protected function _setFieldVars() {
 		$this->_fields = array(
 			'formtoken'	=> new Fields\FormId,
+			'step'			=> new Fields\Step,
 			'wallet'		=> new Fields\Wallet,
 			'number'		=> new Fields\Number,
 			'rate'			=> new Fields\BitCoinRate,
@@ -35,29 +30,17 @@ class Main implements \Stafleu\Interfaces\Form {
 			'bank'			=> new Fields\IdealBank,
 		);
 
+		$this->_fields['step']->addStep('start')
+													->addStep('step2')
+													->setAttribute('value', 'start')
+		;
+
 		foreach ( $this->_fields as $name => $field ) {
 			$field->setAttribute('name', $name)
 				//		->setAttribute('required')
 			;
 		} // foreach
 	} // _setFieldVars
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\Form::getStep()
-	 */
-	public function getStep() {
-		return $this->_step;
-	} // getStep();
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\Form::setStep()
-	 */
-	public function setStep($step) {
-		$this->_step = $step;
-		return $this;
-	} // setStep();
 
 	/**
 	 * (non-PHPdoc)
@@ -76,8 +59,22 @@ class Main implements \Stafleu\Interfaces\Form {
 	 * @see \Stafleu\Interfaces\Form::getTemplate()
 	 */
 	public function getTemplate() {
-		return BASEDIR . 'templates/main_form_step' . $this->_step . '.phtml';
+		return BASEDIR . 'templates/main_form_step_' . $this->step . '.phtml';
 	} // getTemplate();
+
+	/**
+	 * Validates the request for this form
+	 *
+	 * @param array $req
+	 */
+	public function validate(array $req = array()) {
+		foreach ( $req as $key => $val ) {
+			if ( !$this->_fields[$key]->validate($val) ) {
+				return false;
+			}
+		} // foreach
+		return true;
+	} // validate();
 
 	/**
 	 * (non-PHPdoc)
@@ -86,7 +83,6 @@ class Main implements \Stafleu\Interfaces\Form {
 	public function serialize() {
 		return serialize(array(
 				'fields' => $this->_fields,
-				'step' => $this->_step,
 		));
 	} // serialize();
 
@@ -97,7 +93,6 @@ class Main implements \Stafleu\Interfaces\Form {
 	public function unserialize($serialized) {
 		$tmp = unserialize($serialized);
 		$this->_fields = $tmp['fields'];
-		$this->_step = $tmp['step'];
 	} // unserialize();
 
 	/**

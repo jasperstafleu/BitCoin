@@ -3,19 +3,8 @@ namespace Stafleu\Interfaces;
 
 interface Form extends Model, \Serializable {
 	/**
-	 * Get the current step of the form
-	 */
-	public function getStep();
-
-	/**
-	 * Set the current step of the form
-	 * @param number $step
-	 */
-	public function setStep($step);
-
-	/**
 	 * Set the fields of the form from the request
-	 * @param unknown $request
+	 * @param array $request
 	 */
 	public function setRequest(array $request = array());
 

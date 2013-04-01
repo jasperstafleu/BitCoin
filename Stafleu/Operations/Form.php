@@ -8,6 +8,9 @@ class Form implements \Stafleu\Interfaces\Operation {
 	 * @see \Stafleu\Interfaces\Operation::run()
 	 */
 	public function run(\Stafleu\Interfaces\Model $model, array $req = array()) {
+		if ( !$model->validate($req) ) {
+			unset($req['step']);
+		}
 		$model->setRequest($req);
 	} // run();
 
