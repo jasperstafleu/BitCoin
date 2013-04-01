@@ -36,7 +36,9 @@ class Option implements \Stafleu\Interfaces\FormField {
 	 * @see \Stafleu\Interfaces\FormField::getAttribute()
 	 */
 	public function getAttribute($attr) {
-		return $this->_htmlAttributes[$attr] ?: null;
+		return isset($this->_htmlAttributes[$attr])
+						? $this->_htmlAttributes[$attr]
+						: null;
 	} // getAttribute();
 
 	/**
@@ -58,11 +60,36 @@ class Option implements \Stafleu\Interfaces\FormField {
 	public function toHtml() {
 		$ret = '<option';
 		foreach ( $this->_htmlAttributes as $attr => $val ) {
-			$ret .= ' ' . $attr . '="' . addslashes($val) . '"';
+			$ret .= ' ' . $attr . '="' . htmlspecialchars($val) . '"';
 		} // foreach
 		$ret .= ">" . $this->string . "</option>	";
 		return $ret;
 	} // toHtml();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \Stafleu\Interfaces\FormField::validate()
+	 */
+	public function validate($value = null) {
+		return true;
+	} // validate();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \Stafleu\Interfaces\FormField::getValidationError()
+	 */
+	public function getValidationError() {
+
+	} // getValidationError();
+
+	/**
+	 * Returns whether this option is a selected option
+	 *
+	 * @return boolean
+	 */
+	public function isSelected() {
+		return isset($this->_htmlAttributes['selected']);
+	} // isSelected();
 
 	/**
 	 * (non-PHPdoc)

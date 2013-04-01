@@ -12,4 +12,10 @@ interface FormSelect extends FormField {
 	 */
 	public function addOption($value, $string = null, $onTop = false);
 
+	/**
+	 * Returns the (first) selected option for this FormSelect
+	 *
+	 * @return		\Stafleu\Models\Forms\Fields\Option
+	 */
+	public function getSelectedOption();
 } // end interface FormSelect

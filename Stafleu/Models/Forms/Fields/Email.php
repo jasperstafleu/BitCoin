@@ -29,7 +29,9 @@ class Email implements \Stafleu\Interfaces\FormInput {
 	 * @see \Stafleu\Interfaces\FormField::getAttribute()
 	 */
 	public function getAttribute($attr) {
-		return $this->_htmlAttributes[$attr] ?: null;
+		return isset($this->_htmlAttributes[$attr])
+						? $this->_htmlAttributes[$attr]
+						: null;
 	} // getAttribute();
 
 	/**
@@ -51,11 +53,36 @@ class Email implements \Stafleu\Interfaces\FormInput {
 	public function toHtml() {
 		$ret = '<input';
 		foreach ( $this->_htmlAttributes as $attr => $val ) {
-			$ret .= ' ' . $attr . '="' . addslashes($val) . '"';
+			$ret .= ' ' . $attr . '="' . htmlspecialchars($val) . '"';
 		} // foreach
 		$ret .= "/>";
 		return $ret;
 	} // toHtml();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \Stafleu\Interfaces\FormField::validate()
+	 */
+	public function validate($value = null) {
+		if ( $value === null ) {
+			$value = $this->getAttribute('value');
+		}
+		if ( $value === null ) {
+			return true;
+		}
+		return filter_var($value, FILTER_VALIDATE_EMAIL);
+	} // validate();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \Stafleu\Interfaces\FormField::getValidationError()
+	 */
+	public function getValidationError() {
+		if ( !$this->validate($this->getAttribute('value')) ) {
+			return 'Value is not a valid email address';
+		}
+		return '';
+	} // getValidationError();
 
 	/**
 	 * (non-PHPdoc)

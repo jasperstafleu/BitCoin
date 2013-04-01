@@ -28,12 +28,12 @@ class Rate implements \Stafleu\Interfaces\View {
 	 * @param \Stafleu\Interfaces\Model $model
 	 */
 	public function jsonp(\Stafleu\Interfaces\Model $model) {
-		if ( empty($_REQUEST['callback']) ) {
+		if ( empty($_GET['callback']) ) {
 			$this->json($model);
 			return;
 		}
 		header('Content-type: application/javascript');
-		echo $_REQUEST['callback'] . '(' . json_encode($model) . ');';
+		echo $_GET['callback'] . '(' . json_encode($model) . ');';
 	} // jsonp();
 
 } // end class Rate

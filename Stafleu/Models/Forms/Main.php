@@ -1,7 +1,7 @@
 <?php
 namespace Stafleu\Models\Forms;
 
-class Main implements \Stafleu\Interfaces\Form	 {
+class Main implements \Stafleu\Interfaces\Form {
 	/**
 	 * The current step of this form
 	 * @var number
@@ -27,12 +27,12 @@ class Main implements \Stafleu\Interfaces\Form	 {
 	 */
 	protected function _setFieldVars() {
 		$this->_fields = array(
-			'id'			=> new Fields\FormId,
-			'wallet'	=> new Fields\Wallet,
-			'number'	=> new Fields\Number,
-			'rate'		=> new Fields\BitCoinRate,
-			'email'		=> new Fields\Email,
-			'bank'		=> new Fields\IdealBank,
+			'formtoken'	=> new Fields\FormId,
+			'wallet'		=> new Fields\Wallet,
+			'number'		=> new Fields\Number,
+			'rate'			=> new Fields\BitCoinRate,
+			'email'			=> new Fields\Email,
+			'bank'			=> new Fields\IdealBank,
 		);
 
 		foreach ( $this->_fields as $name => $field ) {
@@ -69,7 +69,6 @@ class Main implements \Stafleu\Interfaces\Form	 {
 				$field->setAttribute('value', $request[$name]);
 			}
 		} // foreach
-
 	} // setRequest();
 
 	/**
@@ -85,7 +84,10 @@ class Main implements \Stafleu\Interfaces\Form	 {
 	 * @see Serializable::serialize()
 	 */
 	public function serialize() {
-
+		return serialize(array(
+				'fields' => $this->_fields,
+				'step' => $this->_step,
+		));
 	} // serialize();
 
 	/**
@@ -93,7 +95,9 @@ class Main implements \Stafleu\Interfaces\Form	 {
 	 * @see Serializable::unserialize()
 	 */
 	public function unserialize($serialized) {
-
+		$tmp = unserialize($serialized);
+		$this->_fields = $tmp['fields'];
+		$this->_step = $tmp['step'];
 	} // unserialize();
 
 	/**

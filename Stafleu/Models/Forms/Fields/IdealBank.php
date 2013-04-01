@@ -50,7 +50,9 @@ class IdealBank implements \Stafleu\Interfaces\FormSelect {
 	 * @see \Stafleu\Interfaces\FormField::getAttribute()
 	 */
 	public function getAttribute($attr) {
-		return isset($this->_htmlAttributes[$attr]) ? $this->_htmlAttributes[$attr] : null;
+		return isset($this->_htmlAttributes[$attr])
+						? $this->_htmlAttributes[$attr]
+						: null;
 	} // getAttribute();
 
 	/**
@@ -59,11 +61,17 @@ class IdealBank implements \Stafleu\Interfaces\FormSelect {
 	 */
 	public function setAttribute($attr, $val = null) {
 		if ( $attr === 'placeholder' ) {
-			if ( !empty($this->options[0]) && empty($this->options[0]->value) ) {
-				array_shift($this->options);
+			if ( !empty($this->_options[0]) ) {
+				$tmp = $this->_options[0]->getAttribute('value');
+				if ( empty($tmp) ) {
+					array_shift($this->_options);
+				}
 			}
 			$this->addOption('', $val, true);
 			$this->_options[0]->setAttribute('disabled');
+			if ( $this->getSelectedOption() === null ) {
+				$this->_options[0]->setAttribute('selected');
+			}
 		} else {
 			if ( $val === null ) {
 				$val = $attr;
@@ -80,7 +88,7 @@ class IdealBank implements \Stafleu\Interfaces\FormSelect {
 	public function toHtml() {
 		$ret = '<select';
 		foreach ( $this->_htmlAttributes as $attr => $val ) {
-			$ret .= ' ' . $attr . '="' . addslashes($val) . '"';
+			$ret .= ' ' . $attr . '="' . htmlspecialchars($val) . '"';
 		} // foreach
 		$ret .= ">";
 
@@ -95,6 +103,41 @@ class IdealBank implements \Stafleu\Interfaces\FormSelect {
 
 		return $ret;
 	} // toHtml();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \Stafleu\Interfaces\FormField::validate()
+	 */
+	public function validate($value = null) {
+		if ( $value === null ) {
+			$value = $this->getAttribute('value');
+		}
+		if ( $value === null ) {
+			return true;
+		}
+		return true; // TODO: write bank validation code
+	} // validate();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \Stafleu\Interfaces\FormField::getValidationError()
+	 */
+	public function getValidationError() {
+		return $this->validate() ? '' : 'No valid option selected';
+	} // getValidationError();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \Stafleu\Interfaces\FormSelect::getSelectedOption()
+	 */
+	public function getSelectedOption() {
+		foreach ( $this->_options as $option ) {
+			if ( $option->isSelected() ) {
+				return $option;
+			}
+		} // foreach
+		return null;
+	} // getSelectedOption();
 
 	/**
 	 * (non-PHPdoc)

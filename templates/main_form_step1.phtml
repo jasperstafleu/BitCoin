@@ -11,12 +11,12 @@
 		<div class="row">
 
 			<article class="span9">
-				<form class="form-horizontal" method="POST">
-					<?=$form->id->toHtml()?>
+				<form class="form-horizontal" method="POST" novalidate="novalidate">
+					<?=$form->formtoken->toHtml()?>
 					<fieldset>
 						<legend>Order BitCoins</legend>
 
-						<div class="control-group">
+						<div class="control-group<?=$form->wallet->validate()?'':' error'?>">
 							<label class="control-label" for="<?=$form->wallet->uid?>">Wallet</label>
 							<div class="controls">
 								<?=$form->wallet
@@ -24,30 +24,34 @@
 												->setAttribute('placeholder', 'Wallet')
 												->toHtml()
 								?>
+								<span class="help-inline"><?=$form->wallet->getValidationError()?></span>
 							</div>
 						</div>
 
-						<div class="control-group">
+						<div class="control-group<?=$form->number->validate()?'':' error'?>">
 							<label class="control-label" for="<?=$form->number->uid?>">Bitcoins</label>
 							<div class="controls">
 								<?=$form->number
 												->setAttribute('class', 'span5')
 												->setAttribute('placeholder', 'Number of Bitcoins')
+												->setAttribute('type', 'text')
 												->toHtml()
 								?>
+								<span class="help-inline"><?=$form->number->getValidationError()?></span>
 							</div>
 						</div>
 
-						<div class="control-group">
+						<div class="control-group<?=$form->rate->validate()?'':' error'?>">
 							<label class="control-label">Price per bitcoin</label>
 							<div class="controls">
 								<span class="uneditable-input span5" id="bitcoinsRate">
 									<?=$form->rate?>
 								</span>
+								<span class="help-inline"><?=$form->rate->getValidationError()?></span>
 							</div>
 						</div>
 
-						<div class="control-group">
+						<div class="control-group<?=$form->email->validate()?'':' error'?>">
 							<label class="control-label" for="<?=$form->email->uid?>">Email</label>
 							<div class="controls">
 								<?=$form->email
@@ -55,10 +59,11 @@
 												->setAttribute('placeholder', 'Email')
 												->toHtml()
 								?>
+								<span class="help-inline"><?=$form->email->getValidationError()?></span>
 							</div>
 						</div>
 
-						<div class="control-group">
+						<div class="control-group<?=$form->bank->validate()?'':' error'?>">
 							<label class="control-label" for="<?=$form->bank->uid?>">Bank</label>
 							<div class="controls">
 								<?=$form->bank
@@ -66,6 +71,7 @@
 												->setAttribute('placeholder', 'Kies bank')
 												->toHtml()
 								?>
+								<span class="help-inline"><?=$form->bank->getValidationError()?></span>
 							</div>
 						</div>
 
