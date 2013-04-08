@@ -27,6 +27,7 @@ class Main implements \Stafleu\Interfaces\Form {
 			'wallet_remember'		=> new Fields\Checkbox,
 			'number'						=> new Fields\Number,
 			'rate'							=> new Fields\BitCoinRate,
+			'amount'						=> new Fields\TotalPurchaseAmount,
 			'email'							=> new Fields\Email,
 			'bank'							=> new Fields\IdealBank,
 		);
@@ -51,6 +52,9 @@ class Main implements \Stafleu\Interfaces\Form {
 		foreach ( $this->_fields as $name => $field ) {
 			if ( isset($request[$name]) ) {
 				$field->setAttribute('value', $request[$name]);
+			}
+			if ( $field instanceof \Stafleu\Interfaces\CalculationFormField ) {
+				$field->calculate($this);
 			}
 		} // foreach
 	} // setRequest();

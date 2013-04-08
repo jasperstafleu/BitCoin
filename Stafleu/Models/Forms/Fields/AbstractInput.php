@@ -61,6 +61,22 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
 
 	/**
 	 * (non-PHPdoc)
+	 * @see \Stafleu\Interfaces\FormField::validate()
+	 */
+	public function validate($value = null) {
+		return true;
+	} // validate();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see \Stafleu\Interfaces\FormField::getValidationError()
+	 */
+	public function getValidationError() {
+
+	} // getValidationError();
+
+	/**
+	 * (non-PHPdoc)
 	 * @see \Stafleu\Interfaces\Model::__toString()
 	 */
 	public function __toString() {

@@ -16,6 +16,16 @@
 					<fieldset>
 						<legend>Order BitCoins</legend>
 
+						<div class="control-group<?=$form->amount->validate()?'':' error'?>">
+							<label class="control-label">Total Amount</label>
+							<div class="controls">
+								<span class="uneditable-input span5" id="bitcoinsRate">
+									<?=$form->amount?>
+								</span>
+								<span class="help-inline"><?=$form->amount->getValidationError()?></span>
+							</div>
+						</div>
+
 						<div class="control-group<?=$form->email->validate()?'':' error'?>">
 							<label class="control-label" for="<?=$form->email->uid?>">Email</label>
 							<div class="controls">

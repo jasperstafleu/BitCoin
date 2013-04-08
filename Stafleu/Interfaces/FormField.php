@@ -2,7 +2,6 @@
 namespace Stafleu\Interfaces;
 
 interface FormField extends Model {
-
 	/**
 	 * Returns the html attribute's value as described by $attr
 	 * .
