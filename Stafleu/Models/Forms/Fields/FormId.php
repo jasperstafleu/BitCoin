@@ -1,13 +1,7 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class FormId implements \Stafleu\Interfaces\FormInput {
-	/**
-	 * Unique id for this field
-	 * @var string
-	 */
-	public $uid = '';
-
+class FormId extends AbstractInput implements \Stafleu\Interfaces\FormInput {
 	/**
 	 * Some random number used in the calculation of the hash to ensure CSRF
 	 * safety
@@ -31,41 +25,6 @@ class FormId implements \Stafleu\Interfaces\FormInput {
 		$this->_randomId = mt_rand();
 		$this->_htmlAttributes['value'] = $this->_generateValue();
 	} // __construct();
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\FormField::getAttribute()
-	 */
-	public function getAttribute($attr) {
-		return isset($this->_htmlAttributes[$attr])
-						? $this->_htmlAttributes[$attr]
-						: null;
-	} // getAttribute();
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\FormField::setAttribute()
-	 */
-	public function setAttribute($attr, $val = null) {
-		if ( $val === null ) {
-			$val = $attr;
-		}
-		$this->_htmlAttributes[$attr] = $val;
-		return $this;
-	} // setAttribute();
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\FormField::toHtml()
-	 */
-	public function toHtml() {
-		$ret = '<input';
-		foreach ( $this->_htmlAttributes as $attr => $val ) {
-			$ret .= ' ' . $attr . '="' . htmlspecialchars($val) . '"';
-		} // foreach
-		$ret .= "/>";
-		return $ret;
-	} // toHtml();
 
 	/**
 	 * (non-PHPdoc)

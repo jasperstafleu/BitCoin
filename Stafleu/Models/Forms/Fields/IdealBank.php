@@ -1,13 +1,7 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class IdealBank implements \Stafleu\Interfaces\FormSelect {
-	/**
-	 * Unique id for this field
-	 * @var string
-	 */
-	public $uid = '';
-
+class IdealBank extends AbstractInput implements \Stafleu\Interfaces\FormSelect {
 	/**
 	 * The html attributes for this form field
 	 * @var array
@@ -44,16 +38,6 @@ class IdealBank implements \Stafleu\Interfaces\FormSelect {
 		}
 		return $this;
 	} // addOption();
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\FormField::getAttribute()
-	 */
-	public function getAttribute($attr) {
-		return isset($this->_htmlAttributes[$attr])
-						? $this->_htmlAttributes[$attr]
-						: null;
-	} // getAttribute();
 
 	/**
 	 * (non-PHPdoc)
@@ -138,13 +122,5 @@ class IdealBank implements \Stafleu\Interfaces\FormSelect {
 		} // foreach
 		return null;
 	} // getSelectedOption();
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\Model::__toString()
-	 */
-	public function __toString() {
-		return $this->_htmlAttributes['value'];
-	} // __toString();
 
 } // end class IdealBank

@@ -1,13 +1,7 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class Step implements \Stafleu\Interfaces\FormInput {
-	/**
-	 * Unique id for this field
-	 * @var string
-	 */
-	public $uid = '';
-
+class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput {
 	/**
 	 * Holder for the valid steps
 	 * @var array
@@ -23,42 +17,11 @@ class Step implements \Stafleu\Interfaces\FormInput {
 	);
 
 	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->uid = uniqid();
-		$this->setAttribute('id', $this->uid);
-	} // __construct();
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\FormField::getAttribute()
-	 */
-	public function getAttribute($attr) {
-		return isset($this->_htmlAttributes[$attr])
-						? $this->_htmlAttributes[$attr]
-						: null;
-	} // getAttribute();
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\FormField::setAttribute()
-	 */
-	public function setAttribute($attr, $val = null) {
-		if ( $val === null ) {
-			$val = $attr;
-		}
-		$this->_htmlAttributes[$attr] = $val;
-		return $this;
-	} // setAttribute();
-
-	/**
 	 * (non-PHPdoc)
 	 * @see \Stafleu\Interfaces\FormField::toHtml()
 	 */
 	public function toHtml() {
 		$ret = '<button';
-
 		foreach ( $this->_htmlAttributes as $attr => $val ) {
 			if ( $attr === 'text' ) continue;
 			$ret .= ' ' . $attr . '="' . htmlspecialchars($val) . '"';
@@ -132,13 +95,5 @@ class Step implements \Stafleu\Interfaces\FormInput {
 		$option->setAttribute('value',$this->_steps[$index]);
 		return $option;
 	} // getPreviousStep();
-
-	/**
-	 * (non-PHPdoc)
-	 * @see \Stafleu\Interfaces\Model::__toString()
-	 */
-	public function __toString() {
-		return (string) $this->getAttribute('value');
-	} // __toString();
 
 } // end class Step

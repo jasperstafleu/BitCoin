@@ -38,6 +38,29 @@
 							</div>
 						</div>
 
+						<div class="control-group<?=$form->wallet->validate()?'':' error'?>">
+							<label class="control-label" for="<?=$form->wallet->uid?>">Wallet</label>
+							<div class="controls">
+								<?=$form->wallet
+											->setAttribute('class', 'span5')
+											->setAttribute('placeholder', 'Wallet address')
+												->toHtml()
+								?>
+								<span class="help-inline"><?=$form->wallet->getValidationError()?></span>
+							</div>
+						</div>
+
+						<div class="control-group<?=$form->wallet_remember->validate()?'':' error'?>">
+							<div class="controls">
+								<label class="checkbox" for="<?=$form->wallet_remember->uid?>">
+									<?=$form->wallet_remember
+													->toHtml()
+									?>
+									Remember wallet address
+								</label>
+							</div>
+						</div>
+
 						<div class="form-actions">
 							<?php
 								if ( $next = $form->step->getNextStep() ) {

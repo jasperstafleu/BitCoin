@@ -21,13 +21,14 @@ class Main implements \Stafleu\Interfaces\Form {
 	 */
 	protected function _setFieldVars() {
 		$this->_fields = array(
-			'formtoken'	=> new Fields\FormId,
-			'step'			=> new Fields\Step,
-			'wallet'		=> new Fields\Wallet,
-			'number'		=> new Fields\Number,
-			'rate'			=> new Fields\BitCoinRate,
-			'email'			=> new Fields\Email,
-			'bank'			=> new Fields\IdealBank,
+			'formtoken'					=> new Fields\FormId,
+			'step'							=> new Fields\Step,
+			'wallet'						=> new Fields\Wallet,
+			'wallet_remember'		=> new Fields\Checkbox,
+			'number'						=> new Fields\Number,
+			'rate'							=> new Fields\BitCoinRate,
+			'email'							=> new Fields\Email,
+			'bank'							=> new Fields\IdealBank,
 		);
 
 		$this->_fields['step']->addStep('start')

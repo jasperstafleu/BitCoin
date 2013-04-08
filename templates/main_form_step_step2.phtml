@@ -16,18 +16,6 @@
 					<fieldset>
 						<legend>Order BitCoins</legend>
 
-						<div class="control-group<?=$form->wallet->validate()?'':' error'?>">
-							<label class="control-label" for="<?=$form->wallet->uid?>">Wallet</label>
-							<div class="controls">
-								<?=$form->wallet
-												->setAttribute('class', 'span5')
-												->setAttribute('placeholder', 'Wallet')
-												->toHtml()
-								?>
-								<span class="help-inline"><?=$form->wallet->getValidationError()?></span>
-							</div>
-						</div>
-
 						<div class="control-group<?=$form->email->validate()?'':' error'?>">
 							<label class="control-label" for="<?=$form->email->uid?>">Email</label>
 							<div class="controls">
