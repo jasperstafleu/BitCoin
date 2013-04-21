@@ -40,4 +40,20 @@ class BitCoinRate extends AbstractInput implements \Stafleu\Interfaces\FormField
 		return $this->value->display;
 	} // __toString();
 
+	/**
+	 * (non-PHPdoc)
+	 * @see Serializable::serialize()
+	 */
+	public function serialize() {
+		return serialize($this->value);
+	} // serialize();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Serializable::unserialize()
+	 */
+	public function unserialize($str) {
+		$this->value = unserialize($str);
+	} // unserialize();
+
 } // end class BitCoinRate

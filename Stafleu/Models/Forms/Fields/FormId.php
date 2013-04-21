@@ -1,7 +1,7 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class FormId extends AbstractInput implements \Stafleu\Interfaces\FormInput {
+class FormId extends AbstractInput implements \Stafleu\Interfaces\FormInput, \Serializable {
 	/**
 	 * Some random number used in the calculation of the hash to ensure CSRF
 	 * safety
@@ -67,5 +67,22 @@ class FormId extends AbstractInput implements \Stafleu\Interfaces\FormInput {
 	public function __toString() {
 		return $this->_htmlAttributes['value'];
 	} // __toString();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Serializable::serialize()
+	 */
+	public function serialize() {
+		return (string) $this->_randomId;
+	} // serialize();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Serializable::unserialize()
+	 */
+	public function unserialize($str) {
+		$this->_randomId = (integer) $str;
+	} // unserialize();
+
 
 } // end class FormId

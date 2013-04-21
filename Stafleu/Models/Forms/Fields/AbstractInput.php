@@ -20,9 +20,16 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
 	 * Constructor
 	 */
 	public function __construct() {
+		$this->_setUID();
+	} // __construct();
+
+	/**
+	 * Set the UID for this form input
+	 */
+	private function _setUID() {
 		$this->uid = uniqid();
 		$this->setAttribute('id', $this->uid);
-	} // __construct();
+	} // _setUID();
 
 	/**
 	 * (non-PHPdoc)
@@ -82,5 +89,28 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
 	public function __toString() {
 		return $this->_htmlAttributes['value'];
 	} // __toString();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Serializable::serialize()
+	 */
+	public function serialize() {
+		if ( isset($this->_htmlAttributes['value']) ) {
+			return serialize($this->_htmlAttributes['value']);
+		}
+		return 	serialize(null);
+	} // serialize();
+
+	/**
+	 * (non-PHPdoc)
+	 * @see Serializable::unserialize()
+	 */
+	public function unserialize($str) {
+		$val = unserialize($str);
+		if ( $val !== null ) {
+			$this->_htmlAttributes['value'] = $val;
+		}
+		$this->_setUID();
+	} // unserialize();
 
 } // end class Email

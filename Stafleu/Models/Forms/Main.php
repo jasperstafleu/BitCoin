@@ -32,17 +32,30 @@ class Main implements \Stafleu\Interfaces\Form {
 			'bank'							=> new Fields\IdealBank,
 		);
 
+		$this->_setSteps();
+		$this->_setNames();
+	} // _setFieldVars
+
+	/**
+	 * Sets the steps field.
+	 */
+	private function _setSteps() {
 		$this->_fields['step']->addStep('start')
 													->addStep('step2')
 													->setAttribute('value', 'start')
 		;
+	} // _setSteps();
 
+	/**
+	 * Sets the names of the fields
+	 */
+	private function _setNames() {
 		foreach ( $this->_fields as $name => $field ) {
 			$field->setAttribute('name', $name)
-				//		->setAttribute('required')
+			//		->setAttribute('required')
 			;
 		} // foreach
-	} // _setFieldVars
+	} // _setNames();
 
 	/**
 	 * (non-PHPdoc)
@@ -98,6 +111,8 @@ class Main implements \Stafleu\Interfaces\Form {
 	public function unserialize($serialized) {
 		$tmp = unserialize($serialized);
 		$this->_fields = $tmp['fields'];
+		$this->_setSteps();
+		$this->_setNames();
 	} // unserialize();
 
 	/**
