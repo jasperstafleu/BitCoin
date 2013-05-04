@@ -1,19 +1,19 @@
 <?php
 function autoloader($class) {
-	$cwd = getcwd();
-	chdir(BASEDIR);
+    $cwd = getcwd();
+    chdir(BASEDIR);
 
-	$namespaces = explode('\\', $class);
-	$classname = explode('_', array_pop($namespaces));
+    $namespaces = explode('\\', $class);
+    $classname = explode('_', array_pop($namespaces));
 
-	$psr0Path = array_merge($namespaces, $classname);
+    $psr0Path = array_merge($namespaces, $classname);
 
-	$filename = implode(DIRECTORY_SEPARATOR, $psr0Path) . '.php';
+    $filename = implode(DIRECTORY_SEPARATOR, $psr0Path) . '.php';
 
-	require_once($filename);
-	chdir($cwd);
+    require_once($filename);
+    chdir($cwd);
 
-	return class_exists($class);
+    return class_exists($class);
 } // autoloader();
 
 spl_autoload_register('autoloader');
