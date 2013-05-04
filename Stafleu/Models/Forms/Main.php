@@ -24,15 +24,15 @@ class Main implements \Stafleu\Interfaces\Form
     protected function _setFieldVars()
     {
         $this->_fields = array(
-            'formtoken'            => new Fields\FormId,
-            'step'                => new Fields\Step,
+            'formtoken'         => new Fields\FormId,
+            'step'              => new Fields\Step,
             'wallet'            => new Fields\Wallet,
-            'wallet_remember'    => new Fields\Checkbox,
+            'wallet_remember'   => new Fields\Checkbox,
             'number'            => new Fields\Number,
-            'rate'                => new Fields\BitCoinRate,
+            'rate'              => new Fields\BitCoinRate,
             'amount'            => new Fields\TotalPurchaseAmount,
-            'email'                => new Fields\Email,
-            'bank'                => new Fields\IdealBank,
+            'email'             => new Fields\Email,
+            'bank'              => new Fields\IdealBank,
         );
 
         $this->_setSteps();

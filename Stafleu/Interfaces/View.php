@@ -1,8 +1,8 @@
 <?php
 namespace Stafleu\Interfaces;
 
-interface View {
-
+interface View
+{
     /**
      * Default view method. Each view needs to implement this as fallback view
      * type. It can also be used as "template" for each other view type.

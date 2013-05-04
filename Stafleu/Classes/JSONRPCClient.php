@@ -71,15 +71,15 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient
 
     /**
      * Available options are:
-     * - trace:            Set this to true if you wish to trace requests using the
-     *                     __getLastRequest, __getLastRequestHeaders,
-     *                     __getLastResponse and __getLastResponseHeaders methods
-     * - location:        If no location is given, place it in here
-     * - version:        The RPC version to use. Defaults to 2.0
-     * - login:            The username for the requests made
-     * - password:        The password for the requests made
-     * - exceptions:    The class of the exception to throw when the service
-     *                     returns an error. Defaults to \Exception
+     * - trace:      Set this to true if you wish to trace requests using the
+     *               __getLastRequest, __getLastRequestHeaders,
+     *               __getLastResponse and __getLastResponseHeaders methods
+     * - location:   If no location is given, place it in here
+     * - version:    The RPC version to use. Defaults to 2.0
+     * - login:      The username for the requests made
+     * - password:   The password for the requests made
+     * - exceptions: The class of the exception to throw when the service
+     *               returns an error. Defaults to \Exception
      *
      * TODO
      * Something with SSL
@@ -163,7 +163,11 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient
         ));
 
         if ( !empty($this->_login) && !empty($this->_password) ) {
-            curl_setopt($curl, CURLOPT_USERPWD, $this->_login . ':' . $this->_password);
+            curl_setopt(
+                $curl,
+                CURLOPT_USERPWD,
+                $this->_login . ':' . $this->_password
+            );
         }
 
         if ( $this->_trace ) {

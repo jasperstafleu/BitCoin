@@ -88,7 +88,8 @@ class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput
     } // getNextStep();
 
     /**
-     * Returns a new Step, with as its value the one the previous step would have.
+     * Returns a new Step, with as its value the one the previous step would
+     * have.
      *
      * @return Stafleu\Models\Forms\Fields\Step
      */

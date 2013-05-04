@@ -1,8 +1,8 @@
 <?php
 namespace Stafleu\Interfaces;
 
-interface Model {
-
+interface Model
+{
     /**
      * Stringifier for this model
      * @return string

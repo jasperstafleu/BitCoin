@@ -1,7 +1,8 @@
 <?php
 namespace Stafleu\Interfaces;
 
-interface FormField extends Model {
+interface FormField extends Model
+{
     /**
      * Returns the html attribute's value as described by $attr
      * .
@@ -12,9 +13,9 @@ interface FormField extends Model {
 
     /**
      * Set an html attribute for this FormField
-     * @param string $attr    The attribute to set
-     * @param string [$val]    The value of the attribute to set. If empty (null),
-     *                         the value should equal the name of the attribute
+     * @param string $attr  The attribute to set
+     * @param string [$val] The value of the attribute to set. If empty (null),
+     *                      the value should equal the name of the attribute
      */
     public function setAttribute($attr, $val = null);
 

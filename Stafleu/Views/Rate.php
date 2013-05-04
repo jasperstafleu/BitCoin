@@ -24,8 +24,8 @@ class Rate implements \Stafleu\Interfaces\View
     } // json();
 
     /**
-     * If $_REQUEST['callback'] is set, returns the $model wrapped in a javascript
-     * function (callback). Otherwise, this is an alias of json
+     * If $_REQUEST['callback'] is set, returns the $model wrapped in a
+     * javascript function (callback). Otherwise, this is an alias of json
      *
      * @param \Stafleu\Interfaces\Model $model
      */
