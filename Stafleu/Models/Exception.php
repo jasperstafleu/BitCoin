@@ -1,6 +1,19 @@
 <?php
 namespace Stafleu\Models;
+
 class Exception extends \Exception implements \Stafleu\Interfaces\Model {
+
+	/**
+	 * Handler for exceptions.
+	 *
+	 * @see set_exception_handler
+	 * @param unknown $exception
+	 */
+	public static function handler(\Exception $exception) {
+		restore_exception_handler();
+		// TODO: Something with sending mails to admin
+		require BASEDIR . 'templates/exception.phtml';
+	} // handler();
 
 	/**
 	 * (non-PHPdoc)
@@ -10,11 +23,6 @@ class Exception extends \Exception implements \Stafleu\Interfaces\Model {
 		return $this->getMessage();
 	} // __toString();
 
-	public static function handler($exception) {
-		restore_exception_handler();
-		// TODO: Something with sending mails to admin
-		require BASEDIR . 'templates/exception.phtml';
-	} // handler();
 
 } // end class Exception
 

@@ -30,15 +30,17 @@ interface RPCClient {
 	 * Does a request called $request, to RPC $location,
 	 * @param string	$request	The request body
 	 * @param string	$location	The URI to send the request to
-	 * @param string	$action		The action to undertake. For SOAP, this is the HTTP word
-	 * @param string	$version	The version of the request type. Defaults to false,
-	 * 													since not all clients need to implement it
+	 * @param string	$action		The action to undertake. For SOAP, this is the
+	 * 													HTTP word
+	 * @param string	$version	The version of the request type. Defaults to
+	 * 													false, since not all clients need to implement it
 	 * @param boolean	$one_way	If true, will not wait for the request to return.
 	 * 													Use this for calling methods when the response
 	 * 													does not matter. Not guaranteed to be implemented
 	 * @return mixed
 	 */
-	public function __doRequest($request, $location, $action, $version = false, $one_way = false);
+	public function __doRequest($request, $location, $action, $version = false,
+			$one_way = false);
 
 	/**
 	 * Returns a listing of valid functions to call.

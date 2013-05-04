@@ -4,6 +4,12 @@ namespace Stafleu\Classes;
 class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
 
 	/**
+	 * The request id of the last request. 0 indicates no requests send yet
+	 * @var integer
+	 */
+	private static $_id = 0;
+
+	/**
 	 * Holder for the URI to send requests to
 	 * @var string
 	 */
@@ -64,12 +70,6 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
 	private $_exceptions = '\Exception';
 
 	/**
-	 * The request id of the last request. 0 indicates no requests send yet
-	 * @var integer
-	 */
-	private static $_id = 0;
-
-	/**
 	 * Available options are:
 	 * - trace:					Set this to true if you wish to trace requests using the
 	 * 									__getLastRequest, __getLastRequestHeaders,
@@ -118,14 +118,20 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
 	 * @see \Stafleu\Interfaces\RPCClient::__call()
 	 */
 	public function __call($function_name, $arguments) {
-		return $this->__doRequest(json_encode($arguments), $this->_location, $function_name, $this->_version);
+		return $this->__doRequest(
+				json_encode($arguments),
+				$this->_location,
+				$function_name,
+				$this->_version
+		);
 	} // __call();
 
 	/**
 	 * (non-PHPdoc)
 	 * @see \Stafleu\Interfaces\RPCClient::__doRequest()
 	 */
-	public function __doRequest($request, $location, $action, $version = false, $one_way = false) {
+	public function __doRequest($request, $location, $action, $version = false,
+			$one_way = false) {
 		// prepares request
 		$request = array(
 				'method'	=> $action,
@@ -179,8 +185,11 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
 			$this->_lastResponseHeaders = array_shift($tmp);
 			$this->_lastResponse = $response = implode($headerSep, $tmp);
 			$this->_lastRequestHeaders = curl_getinfo($curl, CURLINFO_HEADER_OUT);
-			if ( strpos($this->_lastRequestHeaders, $headerSep) === strlen($this->_lastRequestHeaders) - strlen($headerSep) ) {
-				$this->_lastRequestHeaders = substr($this->_lastRequestHeaders, 0, -strlen($headerSep));
+
+			$pos = strlen($this->_lastRequestHeaders) - strlen($headerSep);
+			if ( strpos($this->_lastRequestHeaders, $headerSep) === $pos ) {
+				$this->_lastRequestHeaders
+						= substr($this->_lastRequestHeaders, 0, -strlen($headerSep));
 			}
 		}
 

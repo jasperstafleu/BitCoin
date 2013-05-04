@@ -7,7 +7,8 @@ class Form implements \Stafleu\Interfaces\Event {
 	 * (non-PHPdoc)
 	 * @see \Stafleu\Interfaces\Event::trigger()
 	 */
-	public static function trigger(array $path = array(), array $request = array(), $enacter = 'program') {
+	public static function trigger(array $path = array(),
+			array $request = array(), $enacter = 'program') {
 		if ( !($whichForm = array_shift($path)) ) {
 			$whichForm = 'main';
 		}
@@ -21,7 +22,8 @@ class Form implements \Stafleu\Interfaces\Event {
 	 * @param array $request
 	 * @param string $enacter
 	 */
-	public static function main(array $path = array(), array $request = array(), $enacter = 'program') {
+	public static function main(array $path = array(),
+			array $request = array(), $enacter = 'program') {
 		$operation = new \Stafleu\Operations\Form();
 
 		if ( !empty($_SESSION[__METHOD__])

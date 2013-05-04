@@ -18,9 +18,12 @@ class TotalPurchaseAmount extends AbstractInput implements
 	 */
 	public function calculate(\Stafleu\Interfaces\Form $form) {
 		$rate = $form->rate->value;
-		$val = ($form->number->getAttribute('value') * $rate->valueInt) / $rate->intDivider;
+		$val = $form->number->getAttribute('value') * $rate->valueInt;
+		$val /= $rate->intDivider;
+
 		$val = max(round($val, 2), 0.01);
-		$this->value = substr($rate->display, 0, strpos($rate->display, ' ')) . sprintf(' %01.2f', $val);
+		$this->value = substr($rate->display, 0, strpos($rate->display, ' '))
+							. sprintf(' %01.2f', $val);
 		return $this;
 	} // calculate();
 

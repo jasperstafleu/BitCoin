@@ -14,6 +14,7 @@ interface Event {
 	 * 												operations. Therefore, never set this parameter,
 	 * 												except during original Dispatch
 	 */
-	public static function trigger(array $path = array(), array $request = array(), $enacter = 'program');
+	public static function trigger(array $path = array(),
+			array $request = array(), $enacter = 'program');
 
 } // end interface Event

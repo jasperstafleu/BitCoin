@@ -1,7 +1,9 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class BitCoinRate extends AbstractInput implements \Stafleu\Interfaces\FormField {
+class BitCoinRate
+		extends AbstractInput
+		implements \Stafleu\Interfaces\FormField {
 	/**
 	 * Constructor
 	 */

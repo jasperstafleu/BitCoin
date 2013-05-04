@@ -1,7 +1,9 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class IdealBank extends AbstractInput implements \Stafleu\Interfaces\FormSelect {
+class IdealBank
+		extends AbstractInput
+		implements \Stafleu\Interfaces\FormSelect {
 	/**
 	 * The html attributes for this form field
 	 * @var array

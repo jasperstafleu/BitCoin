@@ -79,7 +79,9 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
 	 */
 	public function getCurrent($type = 'high', $retries = 3) {
 		if ( !in_array($type, array('high', 'avg', 'low')) ) {
-			throw new \InvalidArgumentException("Use of '{$type}' is not allowed, use 'high', 'avg' or 'low' instead");
+			throw new \InvalidArgumentException(
+					"Use of '{$type}' is not allowed, use 'high', 'avg' or 'low' instead"
+			);
 		}
 		$comp = new \DateTime('-15 minutes');
 
@@ -88,9 +90,18 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
 			curl_setopt($ch, CURLOPT_FAILONERROR, true);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($ch, CURLOPT_TIMEOUT, 1);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // TODO: Get updated CA certificate bundle
+			// TODO: Get updated CA certificate bundle
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-			curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.22	');
+
+			// fake this useragent: it speeds up MtGox API for some reason
+			// TODO: Fake towards useragent string of actual useragent???
+			curl_setopt(
+					$ch,
+					CURLOPT_USERAGENT,
+					'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22'
+							. ' (KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.2'
+			);
 			if ( !($resp = curl_exec($ch)) ) {
 				if ( $retries <= 0 ) {
 					throw new \Stafleu\Models\Exception(curl_error($ch));
@@ -102,7 +113,9 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
 			$resp = str_replace('\u00a0', ' ', $resp);
 
 			if ( !($res = json_decode($resp)) || $res->result !== 'success' ) {
-				throw new \Stafleu\Models\Exception('MtGox service returned invalid result');
+				throw new \Stafleu\Models\Exception(
+						'MtGox service returned invalid result'
+				);
 			}
 
 			$this->_current = $res->return->$type;
