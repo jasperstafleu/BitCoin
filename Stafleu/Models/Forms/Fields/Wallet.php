@@ -29,7 +29,7 @@ class Wallet extends AbstractInput implements \Stafleu\Interfaces\FormInput {
 	 * @see \Stafleu\Interfaces\FormField::getValidationError()
 	 */
 	public function getValidationError() {
-
+		return '';
 	} // getValidationError();
 
 } // end class Wallet

@@ -31,7 +31,7 @@ class BitCoinRate
 	 * @see \Stafleu\Interfaces\FormField::getValidationError()
 	 */
 	public function getValidationError() {
-
+		return '';
 	} // getValidationError();
 
 	/**

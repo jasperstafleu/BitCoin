@@ -14,7 +14,7 @@ interface FormField extends Model {
 	 * Set an html attribute for this FormField
 	 * @param string $attr	The attribute to set
 	 * @param string [$val]	The value of the attribute to set. If empty (null),
-	 * 											the value should equal the name of the attribute
+	 * 						the value should equal the name of the attribute
 	 */
 	public function setAttribute($attr, $val = null);
 
@@ -22,7 +22,7 @@ interface FormField extends Model {
 	 * Validates the $value for this formfield. To find out why form validation
 	 * failed (if it does), use the getValidationError method.
 	 *
-	 * @param		mixed		$value
+	 * @param	mixed	$value
 	 * @return	Boolean
 	 */
 	public function validate($value);

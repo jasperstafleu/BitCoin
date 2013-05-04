@@ -37,8 +37,8 @@ class Option implements \Stafleu\Interfaces\FormField {
 	 */
 	public function getAttribute($attr) {
 		return isset($this->_htmlAttributes[$attr])
-						? $this->_htmlAttributes[$attr]
-						: null;
+				? $this->_htmlAttributes[$attr]
+				: null;
 	} // getAttribute();
 
 	/**
@@ -79,7 +79,7 @@ class Option implements \Stafleu\Interfaces\FormField {
 	 * @see \Stafleu\Interfaces\FormField::getValidationError()
 	 */
 	public function getValidationError() {
-
+		return '';
 	} // getValidationError();
 
 	/**

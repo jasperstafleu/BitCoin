@@ -12,7 +12,7 @@ interface RPCClient {
 	/**
 	 * Constructor
 	 *
-	 * @param string	$location		The location to send requests for this client to
+	 * @param string	$location	The location to send requests for this client to
 	 * @param array		[$options]	Optional options. Differ per implementation
 	 */
 	public function __construct($location, array $options = array());
@@ -30,13 +30,15 @@ interface RPCClient {
 	 * Does a request called $request, to RPC $location,
 	 * @param string	$request	The request body
 	 * @param string	$location	The URI to send the request to
-	 * @param string	$action		The action to undertake. For SOAP, this is the
-	 * 													HTTP word
+	 * @param string	$action		The action to undertake. For SOAP, this is
+	 * 								the HTTP word
 	 * @param string	$version	The version of the request type. Defaults to
-	 * 													false, since not all clients need to implement it
-	 * @param boolean	$one_way	If true, will not wait for the request to return.
-	 * 													Use this for calling methods when the response
-	 * 													does not matter. Not guaranteed to be implemented
+	 * 								false, since not all clients need to
+	 * 								implement it
+	 * @param boolean	$one_way	If true, will not wait for the request to
+	 * 								return. Use this for calling methods when
+	 * 								the response does not matter. Not guaranteed
+	 * 								to be implemented
 	 * @return mixed
 	 */
 	public function __doRequest($request, $location, $action, $version = false,

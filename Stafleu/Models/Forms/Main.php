@@ -21,15 +21,15 @@ class Main implements \Stafleu\Interfaces\Form {
 	 */
 	protected function _setFieldVars() {
 		$this->_fields = array(
-			'formtoken'					=> new Fields\FormId,
-			'step'							=> new Fields\Step,
-			'wallet'						=> new Fields\Wallet,
-			'wallet_remember'		=> new Fields\Checkbox,
-			'number'						=> new Fields\Number,
-			'rate'							=> new Fields\BitCoinRate,
-			'amount'						=> new Fields\TotalPurchaseAmount,
-			'email'							=> new Fields\Email,
-			'bank'							=> new Fields\IdealBank,
+			'formtoken'			=> new Fields\FormId,
+			'step'				=> new Fields\Step,
+			'wallet'			=> new Fields\Wallet,
+			'wallet_remember'	=> new Fields\Checkbox,
+			'number'			=> new Fields\Number,
+			'rate'				=> new Fields\BitCoinRate,
+			'amount'			=> new Fields\TotalPurchaseAmount,
+			'email'				=> new Fields\Email,
+			'bank'				=> new Fields\IdealBank,
 		);
 
 		$this->_setSteps();
@@ -40,9 +40,10 @@ class Main implements \Stafleu\Interfaces\Form {
 	 * Sets the steps field.
 	 */
 	private function _setSteps() {
-		$this->_fields['step']->addStep('start')
-													->addStep('step2')
-													->setAttribute('value', 'start')
+		$this->_fields['step']
+			->addStep('start')
+			->addStep('step2')
+			->setAttribute('value', 'start')
 		;
 	} // _setSteps();
 

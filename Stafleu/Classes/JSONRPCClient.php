@@ -71,21 +71,20 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
 
 	/**
 	 * Available options are:
-	 * - trace:					Set this to true if you wish to trace requests using the
-	 * 									__getLastRequest, __getLastRequestHeaders,
-	 * 									__getLastResponse and __getLastResponseHeaders methods
-	 * - location:			If no location is given, place it in here
-	 * - version:				The RPC version to use. Defaults to 2.0
-	 * - login:					The username for the requests made
-	 * - password:			The password for the requests made
-	 * - exceptions			The class of the exception to throw when the service
-	 * 									returns an error. Defaults to \Exception
+	 * - trace:			Set this to true if you wish to trace requests using the
+	 * 					__getLastRequest, __getLastRequestHeaders,
+	 * 					__getLastResponse and __getLastResponseHeaders methods
+	 * - location:		If no location is given, place it in here
+	 * - version:		The RPC version to use. Defaults to 2.0
+	 * - login:			The username for the requests made
+	 * - password:		The password for the requests made
+	 * - exceptions:	The class of the exception to throw when the service
+	 * 					returns an error. Defaults to \Exception
 	 *
 	 * TODO
 	 * Something with SSL
-	 * - local_cert			Local SSL certification
-	 * - passphrase 		Local certificate passphrase
-	 *
+	 * - local_cert		Local SSL certification
+	 * - passphrase 	Local certificate passphrase
 	 *
 	 * @see \Stafleu\Interfaces\RPCClient::__construct()
 	 */
@@ -156,8 +155,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
 		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-			'Content-Type: application/json',				// send request as JSON
-			'Content-length: ' . strlen($request)		// send content length
+			'Content-Type: application/json',		// send request as JSON
+			'Content-length: ' . strlen($request),	// send content length
 		));
 
 		if ( !empty($this->_login) && !empty($this->_password) ) {
@@ -189,7 +188,7 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
 			$pos = strlen($this->_lastRequestHeaders) - strlen($headerSep);
 			if ( strpos($this->_lastRequestHeaders, $headerSep) === $pos ) {
 				$this->_lastRequestHeaders
-						= substr($this->_lastRequestHeaders, 0, -strlen($headerSep));
+					= substr($this->_lastRequestHeaders, 0, -strlen($headerSep));
 			}
 		}
 

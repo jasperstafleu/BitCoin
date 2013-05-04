@@ -68,19 +68,21 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
 	/**
 	 * Retrieve the current values from the MtGox service, as per the $type.
 	 *
-	 * @param string [$type]		The type to obtain. Allows use of high, avg and low
+	 * @param string [$type]	The type to obtain. Allows use of high, avg and low
 	 * @param number [$retries]	The maximum number of times to try and call the
-	 * 													webservice. If $retries != 0 and the request times
-	 * 													out or fails, getCurrent will be called anew,
-	 * 													otherwise, an Exception is thrown
-	 * @throws \InvalidArgumentException if $type is not high, avg or low
-	 * @throws \Stafleu\Models\Exception if service can't be opened or returns an
-	 * 													invalid result, after $retries + 1 attempts
+	 * 							webservice. If $retries != 0 and the request times
+	 * 							out or fails, getCurrent will be called anew,
+	 * 							otherwise, an Exception is thrown
+	 * @throws \InvalidArgumentException
+	 * 							if $type is not high, avg or low
+	 * @throws \Stafleu\Models\Exception
+	 * 							if service can't be opened or returns an invalid
+	 * 							result, after $retries + 1 attempts
 	 */
 	public function getCurrent($type = 'high', $retries = 3) {
 		if ( !in_array($type, array('high', 'avg', 'low')) ) {
 			throw new \InvalidArgumentException(
-					"Use of '{$type}' is not allowed, use 'high', 'avg' or 'low' instead"
+				"Use of '{$type}' is not allowed, use 'high', 'avg' or 'low' instead"
 			);
 		}
 		$comp = new \DateTime('-15 minutes');
@@ -100,7 +102,7 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
 					$ch,
 					CURLOPT_USERAGENT,
 					'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.22'
-							. ' (KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.2'
+					. ' (KHTML, like Gecko) Chrome/25.0.1364.172 Safari/537.2'
 			);
 			if ( !($resp = curl_exec($ch)) ) {
 				if ( $retries <= 0 ) {
@@ -114,7 +116,7 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
 
 			if ( !($res = json_decode($resp)) || $res->result !== 'success' ) {
 				throw new \Stafleu\Models\Exception(
-						'MtGox service returned invalid result'
+					'MtGox service returned invalid result'
 				);
 			}
 

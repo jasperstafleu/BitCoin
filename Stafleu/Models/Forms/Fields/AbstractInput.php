@@ -13,7 +13,7 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
 	 * @var array
 	 */
 	protected $_htmlAttributes = array(
-			'type' => 'text',
+		'type' => 'text',
 	);
 
 	/**
@@ -37,8 +37,8 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
 	 */
 	public function getAttribute($attr) {
 		return isset($this->_htmlAttributes[$attr])
-						? $this->_htmlAttributes[$attr]
-						: null;
+				? $this->_htmlAttributes[$attr]
+				: null;
 	} // getAttribute();
 
 	/**
@@ -79,7 +79,7 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
 	 * @see \Stafleu\Interfaces\FormField::getValidationError()
 	 */
 	public function getValidationError() {
-
+		return '';
 	} // getValidationError();
 
 	/**
