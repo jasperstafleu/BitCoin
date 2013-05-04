@@ -12,6 +12,7 @@ class Exception extends \Exception implements \Stafleu\Interfaces\Model {
 
 	public static function handler($exception) {
 		restore_exception_handler();
+		// TODO: Something with sending mails to admin
 		require BASEDIR . 'templates/exception.phtml';
 	} // handler();
 
