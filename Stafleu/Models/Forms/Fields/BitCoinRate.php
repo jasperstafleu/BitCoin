@@ -3,11 +3,13 @@ namespace Stafleu\Models\Forms\Fields;
 
 class BitCoinRate
         extends AbstractInput
-        implements \Stafleu\Interfaces\FormField {
+        implements \Stafleu\Interfaces\FormField
+{
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->value = (new \Stafleu\Events\Get)->rate();
     } // __construct();
@@ -16,7 +18,8 @@ class BitCoinRate
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::validate()
      */
-    public function validate($value = null) {
+    public function validate($value = null)
+    {
         if ( $value === null ) {
             $value = $this->getAttribute('value');
         }
@@ -30,7 +33,8 @@ class BitCoinRate
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getValidationError()
      */
-    public function getValidationError() {
+    public function getValidationError()
+    {
         return '';
     } // getValidationError();
 
@@ -38,7 +42,8 @@ class BitCoinRate
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\Model::__toString()
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->value->display;
     } // __toString();
 
@@ -46,7 +51,8 @@ class BitCoinRate
      * (non-PHPdoc)
      * @see Serializable::serialize()
      */
-    public function serialize() {
+    public function serialize()
+    {
         return serialize($this->value);
     } // serialize();
 
@@ -54,7 +60,8 @@ class BitCoinRate
      * (non-PHPdoc)
      * @see Serializable::unserialize()
      */
-    public function unserialize($str) {
+    public function unserialize($str)
+    {
         $this->value = unserialize($str);
     } // unserialize();
 

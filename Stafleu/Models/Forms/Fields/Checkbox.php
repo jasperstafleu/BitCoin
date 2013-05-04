@@ -1,7 +1,8 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class Checkbox Extends AbstractInput implements \Stafleu\Interfaces\FormInput {
+class Checkbox Extends AbstractInput implements \Stafleu\Interfaces\FormInput
+{
     /**
      * The html attributes for this form field
      * @var array
@@ -15,7 +16,8 @@ class Checkbox Extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::setAttribute()
      */
-    public function setAttribute($attr, $val = null) {
+    public function setAttribute($attr, $val = null)
+    {
         if ( $attr === 'value' ) {
             if ( !empty($val) ) {
                 $this->_htmlAttributes['checked'] = 'checked';
@@ -32,7 +34,8 @@ class Checkbox Extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::toHtml()
      */
-    public function toHtml() {
+    public function toHtml()
+    {
         $name = $this->getAttribute('name');
         $ret = '<input type="hidden" value="0"';
         $ret .= ' name="' . htmlspecialchars($name) . '"';
@@ -45,7 +48,8 @@ class Checkbox Extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::validate()
      */
-    public function validate($value = null) {
+    public function validate($value = null)
+    {
         if ( $value === null ) {
             $value = $this->getAttribute('value');
         }
@@ -56,7 +60,8 @@ class Checkbox Extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getValidationError()
      */
-    public function getValidationError() {
+    public function getValidationError()
+    {
         if ( !$this->validate($this->getAttribute('value')) ) {
             return 'Not a valid email value';
         }
@@ -67,7 +72,8 @@ class Checkbox Extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\Model::__toString()
      */
-    public function __toString() {
+    public function __toString()
+    {
         return empty($this->_htmlAttributes['value']) ? 'No' : 'Yes';
     } // __toString();
 

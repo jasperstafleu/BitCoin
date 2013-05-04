@@ -1,7 +1,8 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class Option implements \Stafleu\Interfaces\FormField {
+class Option implements \Stafleu\Interfaces\FormField
+{
     /**
      * Unique id for this field
      * @var string
@@ -25,7 +26,8 @@ class Option implements \Stafleu\Interfaces\FormField {
     /**
      * Constructor
      */
-    public function __construct($value, $string = null) {
+    public function __construct($value, $string = null)
+    {
         $this->uid = uniqid();
         $this->setAttribute('value', $value);
         $this->string = $string === null ? $value : $string;
@@ -35,7 +37,8 @@ class Option implements \Stafleu\Interfaces\FormField {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getAttribute()
      */
-    public function getAttribute($attr) {
+    public function getAttribute($attr)
+    {
         return isset($this->_htmlAttributes[$attr])
                 ? $this->_htmlAttributes[$attr]
                 : null;
@@ -45,7 +48,8 @@ class Option implements \Stafleu\Interfaces\FormField {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::setAttribute()
      */
-    public function setAttribute($attr, $val = null) {
+    public function setAttribute($attr, $val = null)
+    {
         if ( $val === null ) {
             $val = $attr;
         }
@@ -57,7 +61,8 @@ class Option implements \Stafleu\Interfaces\FormField {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::toHtml()
      */
-    public function toHtml() {
+    public function toHtml()
+    {
         $ret = '<option';
         foreach ( $this->_htmlAttributes as $attr => $val ) {
             $ret .= ' ' . $attr . '="' . htmlspecialchars($val) . '"';
@@ -70,7 +75,8 @@ class Option implements \Stafleu\Interfaces\FormField {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::validate()
      */
-    public function validate($value = null) {
+    public function validate($value = null)
+    {
         return true;
     } // validate();
 
@@ -78,7 +84,8 @@ class Option implements \Stafleu\Interfaces\FormField {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getValidationError()
      */
-    public function getValidationError() {
+    public function getValidationError()
+    {
         return '';
     } // getValidationError();
 
@@ -87,7 +94,8 @@ class Option implements \Stafleu\Interfaces\FormField {
      *
      * @return boolean
      */
-    public function isSelected() {
+    public function isSelected()
+    {
         return isset($this->_htmlAttributes['selected']);
     } // isSelected();
 
@@ -95,7 +103,8 @@ class Option implements \Stafleu\Interfaces\FormField {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\Model::__toString()
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->_htmlAttributes['value'];
     } // __toString();
 

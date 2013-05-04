@@ -1,8 +1,8 @@
 <?php
 namespace Stafleu\Classes;
 
-class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
-
+class JSONRPCClient implements \Stafleu\Interfaces\RPCClient
+{
     /**
      * The request id of the last request. 0 indicates no requests send yet
      * @var integer
@@ -88,7 +88,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      *
      * @see \Stafleu\Interfaces\RPCClient::__construct()
      */
-    public function __construct($location, array $options = array()) {
+    public function __construct($location, array $options = array())
+    {
         if ( empty($location) ) {
             $location = $options['location'];
         }
@@ -116,7 +117,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\RPCClient::__call()
      */
-    public function __call($function_name, $arguments) {
+    public function __call($function_name, $arguments)
+    {
         return $this->__doRequest(
                 json_encode($arguments),
                 $this->_location,
@@ -130,7 +132,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      * @see \Stafleu\Interfaces\RPCClient::__doRequest()
      */
     public function __doRequest($request, $location, $action, $version = false,
-            $one_way = false) {
+            $one_way = false)
+    {
         // prepares request
         $request = array(
                 'method'    => $action,
@@ -213,7 +216,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\RPCClient::__getFunctions()
      */
-    public function __getFunctions() {
+    public function __getFunctions()
+    {
         return explode("\n", $this->help());
     } // __getFunctions();
 
@@ -221,7 +225,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\RPCClient::__getLastRequest()
      */
-    public function __getLastRequest() {
+    public function __getLastRequest()
+    {
         return $this->_lastRequest;
     } // __getLastRequest();
 
@@ -229,7 +234,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\RPCClient::__getLastRequestHeaders()
      */
-    public function __getLastRequestHeaders() {
+    public function __getLastRequestHeaders()
+    {
         return $this->_lastRequestHeaders;
     } // __getLastRequestHeaders();
 
@@ -237,7 +243,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\RPCClient::__getLastResponse()
      */
-    public function __getLastResponse() {
+    public function __getLastResponse()
+    {
         return $this->_lastResponse;
     } // __getLastResponse();
 
@@ -245,7 +252,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\RPCClient::__getLastResponseHeaders()
      */
-    public function __getLastResponseHeaders() {
+    public function __getLastResponseHeaders()
+    {
         return $this->_lastResponseHeaders;
     } // __getLastResponseHeaders();
 
@@ -255,7 +263,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\RPCClient::__setCookie()
      */
-    public function __setCookie($name, $value = false) {
+    public function __setCookie($name, $value = false)
+    {
         throw \Exception(__METHOD__ . ' lacks implementation');
     } // __setCookie();
 
@@ -263,7 +272,8 @@ class JSONRPCClient implements \Stafleu\Interfaces\RPCClient {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\RPCClient::__setLocation()
      */
-    public function __setLocation($location) {
+    public function __setLocation($location)
+    {
         $prev = $this->_location;
         $this->_location = $location;
         return $prev;

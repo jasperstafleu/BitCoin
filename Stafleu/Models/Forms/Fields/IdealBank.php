@@ -3,13 +3,13 @@ namespace Stafleu\Models\Forms\Fields;
 
 class IdealBank
         extends AbstractInput
-        implements \Stafleu\Interfaces\FormSelect {
+        implements \Stafleu\Interfaces\FormSelect
+{
     /**
      * The html attributes for this form field
      * @var array
      */
-    protected $_htmlAttributes = array(
-    );
+    protected $_htmlAttributes = array();
 
     /**
      * An array containing the options for this select
@@ -20,7 +20,8 @@ class IdealBank
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->uid = uniqid();
         $this->setAttribute('id', $this->uid);
         $this->addOption('ING');
@@ -31,7 +32,8 @@ class IdealBank
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormSelect::addOption()
      */
-    public function addOption($value, $string = null, $onTop = false) {
+    public function addOption($value, $string = null, $onTop = false)
+    {
         $option = new Option($value, $string);
         if ( $onTop ) {
             array_unshift($this->_options, $option);
@@ -45,7 +47,8 @@ class IdealBank
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::setAttribute()
      */
-    public function setAttribute($attr, $val = null) {
+    public function setAttribute($attr, $val = null)
+    {
         if ( $attr === 'placeholder' ) {
             if ( !empty($this->_options[0]) ) {
                 $tmp = $this->_options[0]->getAttribute('value');
@@ -71,7 +74,8 @@ class IdealBank
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::toHtml()
      */
-    public function toHtml() {
+    public function toHtml()
+    {
         $ret = '<select';
         foreach ( $this->_htmlAttributes as $attr => $val ) {
             $ret .= ' ' . $attr . '="' . htmlspecialchars($val) . '"';
@@ -94,7 +98,8 @@ class IdealBank
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::validate()
      */
-    public function validate($value = null) {
+    public function validate($value = null)
+    {
         if ( $value === null ) {
             $value = $this->getAttribute('value');
         }
@@ -108,7 +113,8 @@ class IdealBank
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getValidationError()
      */
-    public function getValidationError() {
+    public function getValidationError()
+    {
         return $this->validate() ? '' : 'No valid option selected';
     } // getValidationError();
 
@@ -116,7 +122,8 @@ class IdealBank
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormSelect::getSelectedOption()
      */
-    public function getSelectedOption() {
+    public function getSelectedOption()
+    {
         foreach ( $this->_options as $option ) {
             if ( $option->isSelected() ) {
                 return $option;

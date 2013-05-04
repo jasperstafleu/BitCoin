@@ -1,5 +1,6 @@
 <?php
-function autoloader($class) {
+function autoloader($class)
+{
     $cwd = getcwd();
     chdir(BASEDIR);
 

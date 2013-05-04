@@ -1,7 +1,8 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class Email extends AbstractInput implements \Stafleu\Interfaces\FormInput {
+class Email extends AbstractInput implements \Stafleu\Interfaces\FormInput
+{
     /**
      * The html attributes for this form field
      * @var array
@@ -14,7 +15,8 @@ class Email extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::validate()
      */
-    public function validate($value = null) {
+    public function validate($value = null)
+    {
         if ( $value === null ) {
             $value = $this->getAttribute('value');
         }
@@ -28,7 +30,8 @@ class Email extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getValidationError()
      */
-    public function getValidationError() {
+    public function getValidationError()
+    {
         if ( !$this->validate($this->getAttribute('value')) ) {
             return 'Not a valid email address';
         }

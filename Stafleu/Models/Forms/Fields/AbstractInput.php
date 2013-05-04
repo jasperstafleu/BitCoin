@@ -1,7 +1,8 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
+abstract class AbstractInput implements \Stafleu\Interfaces\FormInput
+{
     /**
      * Unique id for this field
      * @var string
@@ -19,14 +20,16 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->_setUID();
     } // __construct();
 
     /**
      * Set the UID for this form input
      */
-    private function _setUID() {
+    private function _setUID()
+    {
         $this->uid = uniqid();
         $this->setAttribute('id', $this->uid);
     } // _setUID();
@@ -35,7 +38,8 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getAttribute()
      */
-    public function getAttribute($attr) {
+    public function getAttribute($attr)
+    {
         return isset($this->_htmlAttributes[$attr])
                 ? $this->_htmlAttributes[$attr]
                 : null;
@@ -45,7 +49,8 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::setAttribute()
      */
-    public function setAttribute($attr, $val = null) {
+    public function setAttribute($attr, $val = null)
+    {
         if ( $val === null ) {
             $val = $attr;
         }
@@ -57,7 +62,8 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::toHtml()
      */
-    public function toHtml() {
+    public function toHtml()
+    {
         $ret = '<input';
         foreach ( $this->_htmlAttributes as $attr => $val ) {
             $ret .= ' ' . $attr . '="' . htmlspecialchars($val) . '"';
@@ -70,7 +76,8 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::validate()
      */
-    public function validate($value = null) {
+    public function validate($value = null)
+    {
         return true;
     } // validate();
 
@@ -78,7 +85,8 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getValidationError()
      */
-    public function getValidationError() {
+    public function getValidationError()
+    {
         return '';
     } // getValidationError();
 
@@ -86,7 +94,8 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\Model::__toString()
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->_htmlAttributes['value'];
     } // __toString();
 
@@ -94,7 +103,8 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see Serializable::serialize()
      */
-    public function serialize() {
+    public function serialize()
+    {
         if ( isset($this->_htmlAttributes['value']) ) {
             return serialize($this->_htmlAttributes['value']);
         }
@@ -105,7 +115,8 @@ abstract class AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see Serializable::unserialize()
      */
-    public function unserialize($str) {
+    public function unserialize($str)
+    {
         $val = unserialize($str);
         if ( $val !== null ) {
             $this->_htmlAttributes['value'] = $val;

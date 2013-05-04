@@ -1,13 +1,14 @@
 <?php
 namespace Stafleu\Views;
 
-class Rate implements \Stafleu\Interfaces\View {
-
+class Rate implements \Stafleu\Interfaces\View
+{
     /**
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\View::std()
      */
-    public function std(\Stafleu\Interfaces\Model $model) {
+    public function std(\Stafleu\Interfaces\Model $model)
+    {
         echo $model;
     } // json();
 
@@ -16,7 +17,8 @@ class Rate implements \Stafleu\Interfaces\View {
      *
      * @param \Stafleu\Interfaces\Model $model
      */
-    public function json(\Stafleu\Interfaces\Model $model) {
+    public function json(\Stafleu\Interfaces\Model $model)
+    {
         header('Content-type: application/json');
         echo json_encode($model);
     } // json();
@@ -27,7 +29,8 @@ class Rate implements \Stafleu\Interfaces\View {
      *
      * @param \Stafleu\Interfaces\Model $model
      */
-    public function jsonp(\Stafleu\Interfaces\Model $model) {
+    public function jsonp(\Stafleu\Interfaces\Model $model)
+    {
         if ( empty($_GET['callback']) ) {
             $this->json($model);
             return;

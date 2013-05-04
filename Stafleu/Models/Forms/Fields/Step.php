@@ -1,7 +1,8 @@
 <?php
 namespace Stafleu\Models\Forms\Fields;
 
-class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput {
+class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput
+{
     /**
      * Holder for the valid steps
      * @var array
@@ -20,7 +21,8 @@ class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::toHtml()
      */
-    public function toHtml() {
+    public function toHtml()
+    {
         $ret = '<button';
         foreach ( $this->_htmlAttributes as $attr => $val ) {
             if ( $attr === 'text' ) continue;
@@ -36,7 +38,8 @@ class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      *
      * @param string $name
      */
-    public function addStep($name) {
+    public function addStep($name)
+    {
         $this->_steps []= $name;
         return $this;
     } // addOption();
@@ -45,7 +48,8 @@ class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::validate()
      */
-    public function validate($value = null) {
+    public function validate($value = null)
+    {
         if ( $value === null ) {
             $value = $this->getAttribute('value');
         }
@@ -59,7 +63,8 @@ class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getValidationError()
      */
-    public function getValidationError() {
+    public function getValidationError()
+    {
         if ( !$this->validate($this->getAttribute('value')) ) {
             return 'Value is not a valid email address';
         }
@@ -71,7 +76,8 @@ class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      *
      * @return Stafleu\Models\Forms\Fields\Step
      */
-    public function getNextStep() {
+    public function getNextStep()
+    {
         $index = array_search($this->getAttribute('value'), $this->_steps) + 1;
         if ( $index >= count($this->_steps) ) {
             return null;
@@ -86,7 +92,8 @@ class Step extends AbstractInput implements \Stafleu\Interfaces\FormInput {
      *
      * @return Stafleu\Models\Forms\Fields\Step
      */
-    public function getPreviousStep() {
+    public function getPreviousStep()
+    {
         $index = array_search($this->getAttribute('value'), $this->_steps) - 1;
         if ( $index < 0 ) {
             return null;

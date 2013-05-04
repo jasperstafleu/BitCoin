@@ -1,13 +1,14 @@
 <?php
 namespace Stafleu\Classes;
 
-class BitCoinWebserviceClient extends JSONRPCClient {
-
+class BitCoinWebserviceClient extends JSONRPCClient
+{
     /**
      * Constructor. Basically gathers and uses the default values to insert into
      * the parent's constructor
      */
-    public function __construct($location = null, array $options = array()) {
+    public function __construct($location = null, array $options = array())
+    {
         $options = array_merge(array(
                 'login' => '********',
                 'password' => '********',

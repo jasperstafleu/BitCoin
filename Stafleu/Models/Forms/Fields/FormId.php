@@ -3,7 +3,8 @@ namespace Stafleu\Models\Forms\Fields;
 
 class FormId
         extends AbstractInput
-        implements \Stafleu\Interfaces\FormInput, \Serializable {
+        implements \Stafleu\Interfaces\FormInput, \Serializable
+{
     /**
      * Some random number used in the calculation of the hash to ensure CSRF
      * safety
@@ -22,7 +23,8 @@ class FormId
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->uid = uniqid();
         $this->_randomId = mt_rand();
         $this->_htmlAttributes['value'] = $this->_generateValue();
@@ -32,7 +34,8 @@ class FormId
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::validate()
      */
-    public function validate($value = null) {
+    public function validate($value = null)
+    {
         if ( $value === null ) {
             $value = $this->getAttribute('value');
         }
@@ -46,7 +49,8 @@ class FormId
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\FormField::getValidationError()
      */
-    public function getValidationError() {
+    public function getValidationError()
+    {
         if ( !$this->validate($this->getAttribute('value')) ) {
             return 'NO VALID TOKEN';
         }
@@ -58,7 +62,8 @@ class FormId
      *
      * @return string
      */
-    protected function _generateValue() {
+    protected function _generateValue()
+    {
         return sha1($this->_randomId . session_id() . $_SERVER['REMOTE_ADDR']);
     } // _generateValue();
 
@@ -66,7 +71,8 @@ class FormId
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\Model::__toString()
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->_htmlAttributes['value'];
     } // __toString();
 
@@ -74,7 +80,8 @@ class FormId
      * (non-PHPdoc)
      * @see Serializable::serialize()
      */
-    public function serialize() {
+    public function serialize()
+    {
         return (string) $this->_randomId;
     } // serialize();
 
@@ -82,7 +89,8 @@ class FormId
      * (non-PHPdoc)
      * @see Serializable::unserialize()
      */
-    public function unserialize($str) {
+    public function unserialize($str)
+    {
         $this->_randomId = (integer) $str;
     } // unserialize();
 

@@ -1,14 +1,15 @@
 <?php
 namespace Stafleu\Events;
 
-class Get implements \Stafleu\Interfaces\Event {
-
+class Get implements \Stafleu\Interfaces\Event
+{
     /**
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\Event::trigger()
      */
     public static function trigger(array $path = array(),
-            array $request = array(), $enacter = 'program') {
+            array $request = array(), $enacter = 'program')
+    {
         if ( !($what = array_shift($path)) ) {
             throw new \Stafleu\Models\Exception('Incomplete path length');
         }
@@ -24,7 +25,8 @@ class Get implements \Stafleu\Interfaces\Event {
      * @param string $enacter
      */
     public static function rate(array $path = array(),
-            array $request = array(), $enacter = 'program') {
+            array $request = array(), $enacter = 'program')
+    {
         // no operations required
 
         // get BitCoinRate as based on MtGoxService

@@ -1,8 +1,8 @@
 <?php
 namespace Stafleu\Models;
 
-class BitCoinRate implements \Stafleu\Interfaces\Model {
-
+class BitCoinRate implements \Stafleu\Interfaces\Model
+{
     /**
      * The bitcoin value in currency units
      * @var number
@@ -44,7 +44,8 @@ class BitCoinRate implements \Stafleu\Interfaces\Model {
      *
      * @param \Stafleu\Interfaces\BitCoinService $service
      */
-    public function __construct(\Stafleu\Interfaces\BitCoinService $service) {
+    public function __construct(\Stafleu\Interfaces\BitCoinService $service)
+    {
         $this->value = (float) $service->getValue();
         $this->valueInt = (int) $service->getValueInt();
         $this->intDivider = (int) $service->getIntDivider();
@@ -57,7 +58,8 @@ class BitCoinRate implements \Stafleu\Interfaces\Model {
      * (non-PHPdoc)
      * @see \Interfaces\Model::__toString()
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->display;
     } // __toString();
 

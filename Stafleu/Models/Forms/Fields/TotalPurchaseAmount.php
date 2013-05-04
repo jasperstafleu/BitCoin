@@ -3,7 +3,8 @@ namespace Stafleu\Models\Forms\Fields;
 
 class TotalPurchaseAmount extends AbstractInput implements
             \Stafleu\Interfaces\FormField
-        , \Stafleu\Interfaces\CalculationFormField {
+        , \Stafleu\Interfaces\CalculationFormField
+{
     /**
      * The html attributes for this form field
      * @var array
@@ -16,7 +17,8 @@ class TotalPurchaseAmount extends AbstractInput implements
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\CalculationFormField::calculate()
      */
-    public function calculate(\Stafleu\Interfaces\Form $form) {
+    public function calculate(\Stafleu\Interfaces\Form $form)
+    {
         $rate = $form->rate->value;
         $val = $form->number->getAttribute('value') * $rate->valueInt;
         $val /= $rate->intDivider;
@@ -31,7 +33,8 @@ class TotalPurchaseAmount extends AbstractInput implements
      * (non-PHPdoc)
      * @see \Stafleu\Models\Forms\Fields\AbstractInput::__toString()
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->value;
     } // __toString();
 

@@ -1,7 +1,8 @@
 <?php
 namespace Stafleu\Models\Forms;
 
-class Main implements \Stafleu\Interfaces\Form {
+class Main implements \Stafleu\Interfaces\Form
+{
     /**
      * The fields relevant to this form
      * @var unknown
@@ -11,7 +12,8 @@ class Main implements \Stafleu\Interfaces\Form {
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->_setFieldVars();
     } // __construct();
 
@@ -19,7 +21,8 @@ class Main implements \Stafleu\Interfaces\Form {
      * Sets the fields variable. It contains information such as field
      * requiredness, validation state and type.
      */
-    protected function _setFieldVars() {
+    protected function _setFieldVars()
+    {
         $this->_fields = array(
             'formtoken'            => new Fields\FormId,
             'step'                => new Fields\Step,
@@ -39,7 +42,8 @@ class Main implements \Stafleu\Interfaces\Form {
     /**
      * Sets the steps field.
      */
-    private function _setSteps() {
+    private function _setSteps()
+    {
         $this->_fields['step']
             ->addStep('start')
             ->addStep('step2')
@@ -50,7 +54,8 @@ class Main implements \Stafleu\Interfaces\Form {
     /**
      * Sets the names of the fields
      */
-    private function _setNames() {
+    private function _setNames()
+    {
         foreach ( $this->_fields as $name => $field ) {
             $field->setAttribute('name', $name)
             //        ->setAttribute('required')
@@ -62,7 +67,8 @@ class Main implements \Stafleu\Interfaces\Form {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\Form::setRequest()
      */
-    public function setRequest(array $request = array()) {
+    public function setRequest(array $request = array())
+    {
         foreach ( $this->_fields as $name => $field ) {
             if ( isset($request[$name]) ) {
                 $field->setAttribute('value', $request[$name]);
@@ -77,7 +83,8 @@ class Main implements \Stafleu\Interfaces\Form {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\Form::getTemplate()
      */
-    public function getTemplate() {
+    public function getTemplate()
+    {
         return BASEDIR . 'templates/main_form_step_' . $this->step . '.phtml';
     } // getTemplate();
 
@@ -86,7 +93,8 @@ class Main implements \Stafleu\Interfaces\Form {
      *
      * @param array $req
      */
-    public function validate(array $req = array()) {
+    public function validate(array $req = array())
+    {
         foreach ( $req as $key => $val ) {
             if ( !$this->_fields[$key]->validate($val) ) {
                 return false;
@@ -99,7 +107,8 @@ class Main implements \Stafleu\Interfaces\Form {
      * (non-PHPdoc)
      * @see Serializable::serialize()
      */
-    public function serialize() {
+    public function serialize()
+    {
         return serialize(array(
                 'fields' => $this->_fields,
         ));
@@ -109,7 +118,8 @@ class Main implements \Stafleu\Interfaces\Form {
      * (non-PHPdoc)
      * @see Serializable::unserialize()
      */
-    public function unserialize($serialized) {
+    public function unserialize($serialized)
+    {
         $tmp = unserialize($serialized);
         $this->_fields = $tmp['fields'];
         $this->_setSteps();
@@ -121,7 +131,8 @@ class Main implements \Stafleu\Interfaces\Form {
      * @param string $field
      * @return \Stafleu\Models\Forms\FormField
      */
-    public function __get($field) {
+    public function __get($field)
+    {
         return $this->_fields[$field];
     } // __get();
 
@@ -129,7 +140,8 @@ class Main implements \Stafleu\Interfaces\Form {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\Model::__toString()
      */
-    public function __toString() {
+    public function __toString()
+    {
         return print_r($this->_values, true);
     } // _toString();
 

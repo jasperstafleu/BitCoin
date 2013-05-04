@@ -1,8 +1,8 @@
 <?php
 namespace Stafleu\Classes;
 
-class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
-
+class MtGoxService implements \Stafleu\Interfaces\BitCoinService
+{
     /**
      * Holder for the currently retrieved values from MtGox
      */
@@ -12,7 +12,8 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\BitCoinService::getCurrency()
      */
-    public function getCurrency() {
+    public function getCurrency()
+    {
         return $this->getCurrent()->currency;
     } // getCurrency();
 
@@ -20,7 +21,8 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\BitCoinService::getDisplay()
      */
-    public function getDisplay() {
+    public function getDisplay()
+    {
         $ret = $this->getCurrent()->display;
         if ( $this->getCurrency() === 'EUR' ) {
             $ret = implode(' ', array_reverse(explode(' ', $ret)));
@@ -32,7 +34,8 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\BitCoinService::getDisplayShort()
      */
-    public function getDisplayShort() {
+    public function getDisplayShort()
+    {
         $ret = $this->getCurrent()->display_short;
         if ( $this->getCurrency() === 'EUR' ) {
             $ret = implode(' ', array_reverse(explode(' ', $ret)));
@@ -44,7 +47,8 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\BitCoinService::getValue()
      */
-    public function getValue() {
+    public function getValue()
+    {
         return $this->getCurrent()->value;
     } // getValue();
 
@@ -52,7 +56,8 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\BitCoinService::getValueInt()
      */
-    public function getValueInt() {
+    public function getValueInt()
+    {
         return $this->getCurrent()->value_int;
     } // getValueInt();
 
@@ -60,7 +65,8 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
      * (non-PHPdoc)
      * @see \Stafleu\Interfaces\BitCoinService::getIntDivider()
      */
-    public function getIntDivider() {
+    public function getIntDivider()
+    {
         $curr = $this->getCurrent();
         return round($this->getValueInt() / $this->getValue());
     } // getIntDivider();
@@ -79,7 +85,8 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
      *                             if service can't be opened or returns an invalid
      *                             result, after $retries + 1 attempts
      */
-    public function getCurrent($type = 'high', $retries = 3) {
+    public function getCurrent($type = 'high', $retries = 3)
+    {
         if ( !in_array($type, array('high', 'avg', 'low')) ) {
             throw new \InvalidArgumentException(
                 "Use of '{$type}' is not allowed, use 'high', 'avg' or 'low' instead"
@@ -133,7 +140,8 @@ class MtGoxService implements \Stafleu\Interfaces\BitCoinService {
      *
      * @param string $what
      */
-    public function __get($what) {
+    public function __get($what)
+    {
         switch ( $what ) {
             case 'current' : return $this->getCurrent();
         } // switch
